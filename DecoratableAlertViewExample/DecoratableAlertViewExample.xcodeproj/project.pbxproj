@@ -8,22 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		E704ADE224DB1C88002CFC56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADE124DB1C88002CFC56 /* AppDelegate.swift */; };
-		E704ADE424DB1C88002CFC56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADE324DB1C88002CFC56 /* SceneDelegate.swift */; };
 		E704ADE624DB1C88002CFC56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADE524DB1C88002CFC56 /* ViewController.swift */; };
 		E704ADE924DB1C88002CFC56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E704ADE724DB1C88002CFC56 /* Main.storyboard */; };
 		E704ADEB24DB1C89002CFC56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E704ADEA24DB1C89002CFC56 /* Assets.xcassets */; };
 		E704ADEE24DB1C89002CFC56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E704ADEC24DB1C89002CFC56 /* LaunchScreen.storyboard */; };
+		E704ADF924DB1E2E002CFC56 /* AlertViewDecoratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADF824DB1E2E002CFC56 /* AlertViewDecoratorProtocol.swift */; };
+		E704ADFC24DB1E98002CFC56 /* TopSlideDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADFB24DB1E98002CFC56 /* TopSlideDecorator.swift */; };
+		E704ADFE24DB1ECA002CFC56 /* BottomSlideDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADFD24DB1ECA002CFC56 /* BottomSlideDecorator.swift */; };
+		E704AE0424DB2109002CFC56 /* DecoratableAlertViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704AE0324DB2109002CFC56 /* DecoratableAlertViewProtocol.swift */; };
+		E704AE0824DB2142002CFC56 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704AE0724DB2142002CFC56 /* ErrorView.swift */; };
+		E704AE0A24DB215F002CFC56 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E704AE0924DB215F002CFC56 /* ErrorView.xib */; };
+		E704AE0C24DB2303002CFC56 /* DecoratableAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704AE0B24DB2303002CFC56 /* DecoratableAlertViewController.swift */; };
+		E704AE1024DB24AF002CFC56 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704AE0F24DB24AF002CFC56 /* UIDevice+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E704ADDE24DB1C88002CFC56 /* DecoratableAlertViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DecoratableAlertViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E704ADE124DB1C88002CFC56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E704ADE324DB1C88002CFC56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E704ADE524DB1C88002CFC56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E704ADE824DB1C88002CFC56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E704ADEA24DB1C89002CFC56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E704ADED24DB1C89002CFC56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E704ADEF24DB1C89002CFC56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E704ADF824DB1E2E002CFC56 /* AlertViewDecoratorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewDecoratorProtocol.swift; sourceTree = "<group>"; };
+		E704ADFB24DB1E98002CFC56 /* TopSlideDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSlideDecorator.swift; sourceTree = "<group>"; };
+		E704ADFD24DB1ECA002CFC56 /* BottomSlideDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSlideDecorator.swift; sourceTree = "<group>"; };
+		E704AE0324DB2109002CFC56 /* DecoratableAlertViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratableAlertViewProtocol.swift; sourceTree = "<group>"; };
+		E704AE0724DB2142002CFC56 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		E704AE0924DB215F002CFC56 /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
+		E704AE0B24DB2303002CFC56 /* DecoratableAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratableAlertViewController.swift; sourceTree = "<group>"; };
+		E704AE0F24DB24AF002CFC56 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +70,9 @@
 		E704ADE024DB1C88002CFC56 /* DecoratableAlertViewExample */ = {
 			isa = PBXGroup;
 			children = (
+				E704AE0D24DB2499002CFC56 /* Extension */,
+				E704ADF524DB1DC1002CFC56 /* DecoratableAlertView */,
 				E704ADE124DB1C88002CFC56 /* AppDelegate.swift */,
-				E704ADE324DB1C88002CFC56 /* SceneDelegate.swift */,
 				E704ADE524DB1C88002CFC56 /* ViewController.swift */,
 				E704ADE724DB1C88002CFC56 /* Main.storyboard */,
 				E704ADEA24DB1C89002CFC56 /* Assets.xcassets */,
@@ -65,6 +80,92 @@
 				E704ADEF24DB1C89002CFC56 /* Info.plist */,
 			);
 			path = DecoratableAlertViewExample;
+			sourceTree = "<group>";
+		};
+		E704ADF524DB1DC1002CFC56 /* DecoratableAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				E704AE0024DB20E1002CFC56 /* Controller */,
+				E704AE0124DB20E7002CFC56 /* View */,
+				E704ADF624DB1E00002CFC56 /* Decorator */,
+			);
+			path = DecoratableAlertView;
+			sourceTree = "<group>";
+		};
+		E704ADF624DB1E00002CFC56 /* Decorator */ = {
+			isa = PBXGroup;
+			children = (
+				E704ADF724DB1E06002CFC56 /* Abstract */,
+				E704ADFA24DB1E43002CFC56 /* Concrete */,
+			);
+			path = Decorator;
+			sourceTree = "<group>";
+		};
+		E704ADF724DB1E06002CFC56 /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				E704ADF824DB1E2E002CFC56 /* AlertViewDecoratorProtocol.swift */,
+			);
+			path = Abstract;
+			sourceTree = "<group>";
+		};
+		E704ADFA24DB1E43002CFC56 /* Concrete */ = {
+			isa = PBXGroup;
+			children = (
+				E704ADFB24DB1E98002CFC56 /* TopSlideDecorator.swift */,
+				E704ADFD24DB1ECA002CFC56 /* BottomSlideDecorator.swift */,
+			);
+			path = Concrete;
+			sourceTree = "<group>";
+		};
+		E704AE0024DB20E1002CFC56 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E704AE0B24DB2303002CFC56 /* DecoratableAlertViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E704AE0124DB20E7002CFC56 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E704AE0224DB20EC002CFC56 /* Abstract */,
+				E704AE0524DB2125002CFC56 /* Concrete */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E704AE0224DB20EC002CFC56 /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				E704AE0324DB2109002CFC56 /* DecoratableAlertViewProtocol.swift */,
+			);
+			path = Abstract;
+			sourceTree = "<group>";
+		};
+		E704AE0524DB2125002CFC56 /* Concrete */ = {
+			isa = PBXGroup;
+			children = (
+				E704AE0624DB2130002CFC56 /* ErrorView */,
+			);
+			path = Concrete;
+			sourceTree = "<group>";
+		};
+		E704AE0624DB2130002CFC56 /* ErrorView */ = {
+			isa = PBXGroup;
+			children = (
+				E704AE0724DB2142002CFC56 /* ErrorView.swift */,
+				E704AE0924DB215F002CFC56 /* ErrorView.xib */,
+			);
+			path = ErrorView;
+			sourceTree = "<group>";
+		};
+		E704AE0D24DB2499002CFC56 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E704AE0F24DB24AF002CFC56 /* UIDevice+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,6 +229,7 @@
 				E704ADEE24DB1C89002CFC56 /* LaunchScreen.storyboard in Resources */,
 				E704ADEB24DB1C89002CFC56 /* Assets.xcassets in Resources */,
 				E704ADE924DB1C88002CFC56 /* Main.storyboard in Resources */,
+				E704AE0A24DB215F002CFC56 /* ErrorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,9 +240,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E704AE0424DB2109002CFC56 /* DecoratableAlertViewProtocol.swift in Sources */,
+				E704ADFC24DB1E98002CFC56 /* TopSlideDecorator.swift in Sources */,
 				E704ADE624DB1C88002CFC56 /* ViewController.swift in Sources */,
+				E704ADFE24DB1ECA002CFC56 /* BottomSlideDecorator.swift in Sources */,
+				E704AE1024DB24AF002CFC56 /* UIDevice+Extension.swift in Sources */,
+				E704AE0C24DB2303002CFC56 /* DecoratableAlertViewController.swift in Sources */,
+				E704AE0824DB2142002CFC56 /* ErrorView.swift in Sources */,
 				E704ADE224DB1C88002CFC56 /* AppDelegate.swift in Sources */,
-				E704ADE424DB1C88002CFC56 /* SceneDelegate.swift in Sources */,
+				E704ADF924DB1E2E002CFC56 /* AlertViewDecoratorProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
