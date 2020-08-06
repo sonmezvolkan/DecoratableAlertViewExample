@@ -15,6 +15,8 @@ public class ErrorView: UIView, AlertViewProtocol {
     
     public var onClose: (() -> Void)?
     
+    public var containerViewBackgroundColor: UIColor? = .red
+    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var lbl: UILabel!
     
@@ -32,6 +34,14 @@ public class ErrorView: UIView, AlertViewProtocol {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(contentView)
+    }
+    
+    public override var intrinsicContentSize: CGSize {
+        return self.contentView.systemLayoutSizeFitting(self.bounds.size)
+    }
+    
+    public override class var requiresConstraintBasedLayout: Bool {
+        return true
     }
     
     public func setErrorMessage(text: String) {

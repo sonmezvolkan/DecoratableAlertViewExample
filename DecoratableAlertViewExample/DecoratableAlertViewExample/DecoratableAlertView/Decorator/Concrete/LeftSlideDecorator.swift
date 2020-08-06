@@ -1,15 +1,15 @@
 //
-//  BottomSlideDecorator.swift
+//  LeftSlideDecorator.swift
 //  DecoratableAlertViewExample
 //
-//  Created by Volkan Sönmez on 5.08.2020.
+//  Created by Volkan SÖNMEZ on 6.08.2020.
 //  Copyright © 2020 Volkan Sönmez. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-public class BottomSlideDecorator: AlertViewDecoratorProtocol {
+public class LeftSlideDecorator: AlertViewDecoratorProtocol {
    
     public var mainView: UIView?
     
@@ -25,7 +25,7 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
     
     public var touchBeganPosition: CGPoint?
     
-    public var canMove: Bool
+    public var canMove: Bool = true
     
     public var animationTime: TimeInterval = 0.4
     
@@ -37,23 +37,31 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
         self.animationTime = 0.4
     }
     
+    public init(canMove: Bool = true, animationTime: TimeInterval = 0.4) {
+        self.canMove = canMove
+        self.animationTime = animationTime
+    }
+    
     public func setConstraints() {
         guard let mainView = self.mainView, let containerView = self.containerView, let alertView = self.alertView else { return }
         containerView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: mainView.topAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor).isActive = true
         containerView.backgroundColor = alertView.containerViewBackgroundColor
         
         containerView.addSubview(alertView)
         alertView.translatesAutoresizingMaskIntoConstraints = false
         
-        containerView.heightAnchor.constraint(equalToConstant: alertView.size.height).isActive = true
+        let topConstraint: CGFloat = UIDevice.current.hasNotch ? 20 : 0
+        
+        containerView.widthAnchor.constraint(equalToConstant: alertView.size.width).isActive = true
         alertView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         alertView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        alertView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        alertView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: topConstraint).isActive = true
         alertView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         
         containerView.setNeedsLayout()
+        containerView.setNeedsUpdateConstraints()
         
         mainView.layoutIfNeeded()
     }
@@ -61,12 +69,11 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
     public func openingAnimate() {
         guard let customView = self.containerView else { return }
         customView.alpha = 0.0
-        let currentPosition = customView.frame.origin.y
-        customView.frame.origin.y += customView.frame.height
+        customView.frame.origin.x -= customView.frame.width
             
         UIView.animate(withDuration: animationTime, animations: {
             customView.alpha = 1.0
-            customView.frame.origin.y = currentPosition
+            customView.frame.origin.x = 0
         })
     }
     
@@ -74,7 +81,7 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
         guard let customView = self.containerView else { return }
         isProcessing = true
         UIView.animate(withDuration: animationTime, animations: {
-            customView.frame.origin.y += customView.frame.height
+            customView.frame.origin.x -= customView.frame.width
             customView.alpha = 0.0
         }) { [weak self] (_) in
             self?.containerView = nil
@@ -91,18 +98,19 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
                 return true
             }
         }
-       
+    
         return false
     }
     
     public func touchesBegan(touches: Set<UITouch>, event: UIEvent?) {
         guard let touch = touches.first else { return }
+        
         let touchIsInCustomView = checkViewLocation(touch: touch)
         if closeTappedAround && !touchIsInCustomView {
             isProcessing = true
             closingAnimate()
         }
-        
+
         if canMove && touchIsInCustomView {
             touchBeganPosition = touch.location(in: mainView)
             isMoving = true
@@ -118,11 +126,12 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
         
         if isMoving && checkViewLocation(touch: touch) {
             let currentTouchLocation = touch.location(in: mainView)
-            let distanceY = currentTouchLocation.y - touchBeganPosition.y + ( mainView.frame.height - customView.frame.height )
+            let distanceX = touchBeganPosition.x - currentTouchLocation.x
            
-            if distanceY >= mainView.frame.height - customView.frame.height {
-                customView.frame.origin.y = distanceY
-                if customView.frame.origin.y >= mainView.frame.height - customView.frame.height * closeableZoneRatio {
+            if distanceX >= 0 && distanceX <= customView.frame.width {
+                customView.frame.origin.x = -distanceX
+            
+                if customView.frame.origin.x <= customView.frame.width / -2 {
                     closingAnimate()
                 }
             }
@@ -135,9 +144,9 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
         
         if checkViewLocation(touch: touch) {
             let currentTouchLocation = touch.location(in: mainView)
-            let distanceY = currentTouchLocation.y - touchBeganPosition.y
+            let distanceX = currentTouchLocation.x - touchBeganPosition.x
             
-            if distanceY < mainView.frame.height - customView.frame.height / 2 {
+            if distanceX > customView.frame.width * -closeableZoneRatio {
                 resetCustomViewPosition(customView: customView, mainView: mainView)
             }
         } else {
@@ -151,10 +160,9 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
     private func resetCustomViewPosition(customView: UIView, mainView: UIView) {
         isProcessing = true
         UIView.animate(withDuration: animationTime / 2, animations: {
-            customView.frame.origin.y = mainView.frame.height - customView.frame.height
+            customView.frame.origin.x = 0
         }, completion: { [weak self] _ in
             self?.isProcessing = false
         })
     }
 }
-

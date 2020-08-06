@@ -17,13 +17,13 @@ class ViewController: UIViewController {
     
     @IBAction func btnShow(_ sender: Any) {
         let errorView = ErrorView()
-        errorView.size = CGSize(width: view.bounds.width, height: 80)
+        errorView.size = CGSize(width: 200, height: 80)
         errorView.setErrorMessage(text: "Volkan")
         let builder = DecoratableAlertViewController.Builder(alertView: errorView,
-                                             alertDecorator: TopSlideDecorator())
+                                             alertDecorator: RightSlideDecorator())
         
-        builder.setCanMove(canMove: false)
-        builder.setAutoCloseEnabled(isEnabled: true, duration: 5)
+        builder.setCanMove(canMove: true)
+        builder.setAutoCloseTimeLimit(limit: 5)
         builder.show()
     }
 }

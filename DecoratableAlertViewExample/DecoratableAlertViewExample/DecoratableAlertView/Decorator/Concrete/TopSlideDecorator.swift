@@ -47,7 +47,7 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
         containerView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor).isActive = true
         containerView.topAnchor.constraint(equalTo: mainView.topAnchor).isActive = true
-        containerView.backgroundColor = .red
+        containerView.backgroundColor = alertView.containerViewBackgroundColor
         
         containerView.addSubview(alertView)
         alertView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,6 +60,9 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
         alertView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         alertView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: topConstraint).isActive = true
         alertView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        
+        containerView.setNeedsLayout()
+        containerView.setNeedsUpdateConstraints()
         
         mainView.layoutIfNeeded()
     }

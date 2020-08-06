@@ -158,7 +158,7 @@ public class DecoratableAlertViewController: UIViewController {
         
         private var alertView: AlertViewProtocol
         private var alertDecorator: AlertViewDecoratorProtocol
-        private var autoClose: Bool = true
+        private var autoClose: Bool = false
         private var timerLimit: Int = 15
         private var closeTappedAround: Bool = true
         private var superViewBackgroundColor: UIColor = .clear
@@ -188,9 +188,14 @@ public class DecoratableAlertViewController: UIViewController {
         }
         
         @discardableResult
-        public func setAutoCloseEnabled(isEnabled: Bool, duration: Int = 15) -> Builder {
-            self.autoClose = isEnabled
-            self.timerLimit = duration
+        public func setAutoCloseDisabled() -> Builder {
+            self.autoClose = false
+            return self
+        }
+        
+        @discardableResult
+        public func setAutoCloseTimeLimit(limit: Int) -> Builder {
+            self.timerLimit = limit
             return self
         }
         
