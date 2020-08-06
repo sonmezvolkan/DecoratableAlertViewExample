@@ -46,5 +46,20 @@ public class ErrorView: UIView, AlertViewProtocol {
     
     public func setErrorMessage(text: String) {
         lbl.text = text
+        setNeedsLayout()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        self.translatesAutoresizingMaskIntoConstraints = false
+        setNeedsUpdateConstraints()
+        
+        print("self frame: \(self.frame)")
+        print("self frame: \(self.contentView.frame)")
+    }
+    
+    public func resizeView() {
+        setNeedsLayout()
+        setNeedsUpdateConstraints()
+        
+        print("self frame: \(self.frame)")
+        print("self frame: \(self.contentView.frame)")
     }
 }

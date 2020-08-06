@@ -51,11 +51,9 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
         
         containerView.addSubview(alertView)
         alertView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let height = UIDevice.current.hasNotch ? alertView.size.height + 20 : alertView.size.height
+
         let topConstraint: CGFloat = UIDevice.current.hasNotch ? 20 : 0
         
-        containerView.heightAnchor.constraint(equalToConstant: height).isActive = true
         alertView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         alertView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         alertView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: topConstraint).isActive = true
@@ -65,6 +63,8 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
         containerView.setNeedsUpdateConstraints()
         
         mainView.layoutIfNeeded()
+        
+        alertView.resizeView()
     }
     
     public func openingAnimate() {
@@ -145,7 +145,7 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
         
         if checkViewLocation(touch: touch) {
             let currentTouchLocation = touch.location(in: mainView)
-            let distanceY = currentTouchLocation.y - touchBeganPosition.y
+            let distanceY = touchBeganPosition.y - currentTouchLocation.y
             
             if distanceY > customView.frame.height * closeableZoneRatio {
                 resetCustomViewPosition(customView: customView, mainView: mainView)

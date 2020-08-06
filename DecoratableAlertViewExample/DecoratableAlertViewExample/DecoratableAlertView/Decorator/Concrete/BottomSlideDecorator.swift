@@ -47,7 +47,6 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
         containerView.addSubview(alertView)
         alertView.translatesAutoresizingMaskIntoConstraints = false
         
-        containerView.heightAnchor.constraint(equalToConstant: alertView.size.height).isActive = true
         alertView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         alertView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         alertView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
@@ -56,6 +55,7 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
         containerView.setNeedsLayout()
         
         mainView.layoutIfNeeded()
+        alertView.resizeView()
     }
     
     public func openingAnimate() {

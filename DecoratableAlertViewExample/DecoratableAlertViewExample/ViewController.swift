@@ -15,12 +15,15 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidLayoutSubviews() {
+        <#code#>
+    }
+    
     @IBAction func btnShow(_ sender: Any) {
         let errorView = ErrorView()
-        errorView.size = CGSize(width: 200, height: 80)
-        errorView.setErrorMessage(text: "Volkan")
+        errorView.setErrorMessage(text: "Volkan\nVolkan\nVolkan")
         let builder = DecoratableAlertViewController.Builder(alertView: errorView,
-                                             alertDecorator: RightSlideDecorator())
+                                             alertDecorator: BottomSlideDecorator())
         
         builder.setCanMove(canMove: true)
         builder.setAutoCloseTimeLimit(limit: 5)
