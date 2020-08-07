@@ -10,6 +10,7 @@
 		3326802224DBEECE005647BE /* ConstraintModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802124DBEECE005647BE /* ConstraintModel.swift */; };
 		3326802424DBEFA8005647BE /* LeftSlideDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802324DBEFA8005647BE /* LeftSlideDecorator.swift */; };
 		3326802624DBEFB5005647BE /* RightSlideDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802524DBEFB5005647BE /* RightSlideDecorator.swift */; };
+		3326802824DBF8C7005647BE /* FadeInDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802724DBF8C7005647BE /* FadeInDecorator.swift */; };
 		E704ADE224DB1C88002CFC56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADE124DB1C88002CFC56 /* AppDelegate.swift */; };
 		E704ADE624DB1C88002CFC56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADE524DB1C88002CFC56 /* ViewController.swift */; };
 		E704ADE924DB1C88002CFC56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E704ADE724DB1C88002CFC56 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		3326802124DBEECE005647BE /* ConstraintModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintModel.swift; sourceTree = "<group>"; };
 		3326802324DBEFA8005647BE /* LeftSlideDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSlideDecorator.swift; sourceTree = "<group>"; };
 		3326802524DBEFB5005647BE /* RightSlideDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightSlideDecorator.swift; sourceTree = "<group>"; };
+		3326802724DBF8C7005647BE /* FadeInDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeInDecorator.swift; sourceTree = "<group>"; };
 		E704ADDE24DB1C88002CFC56 /* DecoratableAlertViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DecoratableAlertViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E704ADE124DB1C88002CFC56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E704ADE524DB1C88002CFC56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				E704ADFD24DB1ECA002CFC56 /* BottomSlideDecorator.swift */,
 				3326802324DBEFA8005647BE /* LeftSlideDecorator.swift */,
 				3326802524DBEFB5005647BE /* RightSlideDecorator.swift */,
+				3326802724DBF8C7005647BE /* FadeInDecorator.swift */,
 			);
 			path = Concrete;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				3326802224DBEECE005647BE /* ConstraintModel.swift in Sources */,
 				E704AE1024DB24AF002CFC56 /* UIDevice+Extension.swift in Sources */,
 				3326802624DBEFB5005647BE /* RightSlideDecorator.swift in Sources */,
+				3326802824DBF8C7005647BE /* FadeInDecorator.swift in Sources */,
 				E704AE0C24DB2303002CFC56 /* DecoratableAlertViewController.swift in Sources */,
 				E704AE0824DB2142002CFC56 /* ErrorView.swift in Sources */,
 				E704ADE224DB1C88002CFC56 /* AppDelegate.swift in Sources */,

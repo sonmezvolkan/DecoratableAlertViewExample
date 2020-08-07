@@ -17,6 +17,8 @@ public protocol AlertViewDecoratorProtocol: class {
     
     var alertView: AlertViewProtocol? { get set }
     
+    var constraintModel: ConstraintModel? { get set }
+    
     var onClose: (() -> Void)? { get set }
     
     var canMove: Bool { get set }

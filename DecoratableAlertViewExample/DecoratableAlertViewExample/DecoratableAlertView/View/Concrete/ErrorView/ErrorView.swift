@@ -47,4 +47,8 @@ public class ErrorView: UIView, AlertViewProtocol {
     public func setErrorMessage(text: String) {
         lbl.text = text
     }
+    
+    @IBAction func btnClose(_ sender: Any) {
+        onClose?()
+    }
 }

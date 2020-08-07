@@ -11,6 +11,7 @@ import UIKit
 
 public class DecoratableAlertViewController: UIViewController {
 
+    private var alertView: AlertViewProtocol?
     private var customAlertView: UIView?
     private var mainView: UIView?
     private var alertDecorator: AlertViewDecoratorProtocol?
@@ -32,10 +33,11 @@ public class DecoratableAlertViewController: UIViewController {
     
     fileprivate init(alertView: AlertViewProtocol, alertDecorator: AlertViewDecoratorProtocol,
                      autoClose: Bool, timerLimit: Int, closeTappedAround: Bool, closableZoneRatio: CGFloat,
-                     superViewBackgroundColor: UIColor, animationTime: TimeInterval, canMove: Bool) {
+                     superViewBackgroundColor: UIColor, animationTime: TimeInterval, canMove: Bool, constraints: ConstraintModel?) {
         super.init(nibName: nil, bundle: nil)
         if customAlertView != nil { return }
-
+        
+        self.alertView = alertView
         self.timerLimit = timerLimit
         self.alertDecorator = alertDecorator
         self.autoClose = autoClose
@@ -43,7 +45,7 @@ public class DecoratableAlertViewController: UIViewController {
         alertDecorator.animationTime = animationTime
         alertDecorator.closeableZoneRatio = closableZoneRatio
         alertDecorator.canMove = canMove
-        
+        alertDecorator.constraintModel = constraints
         self.initMainView()
         self.configureDecorator(alertView: alertView)
         self.setOnClose()
@@ -80,9 +82,7 @@ public class DecoratableAlertViewController: UIViewController {
         alertDecorator.closeableZoneRatio = closableZoneRatio
         alertDecorator.canMove = canMove
         
-        alertView.onClose = { [weak self] in
-            self?.alertDecorator?.closingAnimate()
-        }
+
         
         initMainView()
         configureDecorator(alertView: alertView)
@@ -165,6 +165,7 @@ public class DecoratableAlertViewController: UIViewController {
         private var animationTime: TimeInterval = 0.4
         private var canMove: Bool = true
         private var closableZoneRatio: CGFloat = 0.3
+        private var constraints: ConstraintModel?
         
         public init(alertView: AlertViewProtocol,
                     alertDecorator: AlertViewDecoratorProtocol) {
@@ -230,6 +231,53 @@ public class DecoratableAlertViewController: UIViewController {
             return self
         }
         
+        @discardableResult
+        public func setConstraints(constrains: ConstraintModel) -> Builder {
+            self.constraints = constrains
+            return self
+        }
+        
+        @discardableResult
+        public func setConstraints(constraints: ConstraintModel) -> Builder {
+            self.constraints = constraints
+            return self
+        }
+        
+        @discardableResult
+        public func setLeadingConstrint(constant: CGFloat) -> Builder {
+            let constraints = getConstraints()
+            constraints.leadingConstraint = constant
+            return self
+        }
+        
+        @discardableResult
+        public func setTrailingConstraint(constant: CGFloat) -> Builder {
+            let constraints = getConstraints()
+            constraints.trailingCosntraint = constant
+            return self
+        }
+        
+        @discardableResult
+        public func setTopConstraint(constant: CGFloat) -> Builder {
+            let constraints = getConstraints()
+            constraints.topConstraint = constant
+            return self
+        }
+        
+        @discardableResult
+        public func setBottomConstraint(constant: CGFloat) -> Builder {
+            let constraints = getConstraints()
+            constraints.bottomConstraint = constant
+            return self
+        }
+        
+        private func getConstraints() -> ConstraintModel {
+            if self.constraints == nil {
+                self.constraints = ConstraintModel()
+            }
+            return self.constraints!
+        }
+        
         public func show() {
             guard let viewController = self.getTopMostViewController() else { return }
             let alertController = DecoratableAlertViewController(alertView: alertView,
@@ -239,7 +287,7 @@ public class DecoratableAlertViewController: UIViewController {
                                                                  closeTappedAround: closeTappedAround,
                                                                  closableZoneRatio: closableZoneRatio,
                                                             superViewBackgroundColor: superViewBackgroundColor,
-                                                            animationTime: animationTime, canMove: canMove)
+                                                            animationTime: animationTime, canMove: canMove, constraints: constraints)
             alertController.modalPresentationStyle = .overFullScreen
             viewController.present(alertController, animated: false, completion: nil)
         }
@@ -255,5 +303,9 @@ extension DecoratableAlertViewController {
             self?.onClose?()
             self?.dismiss(animated: false, completion: nil)
         }
+        
+        alertView?.onClose = { [weak self] in
+              self?.alertDecorator?.closingAnimate()
+          }
     }
 }

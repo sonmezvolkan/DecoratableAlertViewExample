@@ -17,6 +17,8 @@ public class RightSlideDecorator: AlertViewDecoratorProtocol {
     
     public var alertView: AlertViewProtocol?
     
+    public var constraintModel: ConstraintModel?
+    
     public var onClose: (() -> Void)?
     
     public var closeTappedAround: Bool = true
@@ -132,8 +134,6 @@ public class RightSlideDecorator: AlertViewDecoratorProtocol {
             if distanceX >= 0 && distanceX <= (mainView.frame.width - customView.frame.width) {
                 customView.frame.origin.x = mainView.frame.width - customView.frame.width + distanceX
                 
-                print("origin x: \(customView.frame.origin.x)")
-                print("width  \(customView.frame.width / -2)")
                 if customView.frame.origin.x >= (mainView.frame.width - alertView.frame.width) + (customView.frame.width / 2) {
                     closingAnimate()
                 }

@@ -20,10 +20,13 @@ class ViewController: UIViewController {
         errorView.size = CGSize(width: 200, height: 80)
         errorView.setErrorMessage(text: "Volkan")
         let builder = DecoratableAlertViewController.Builder(alertView: errorView,
-                                             alertDecorator: RightSlideDecorator())
+                                             alertDecorator: BottomSlideDecorator())
         
         builder.setCanMove(canMove: true)
         builder.setAutoCloseTimeLimit(limit: 5)
+        builder.setLeadingConstrint(constant: 36)
+        builder.setTrailingConstraint(constant: 36)
+        builder.setTopConstraint(constant: 80)
         builder.show()
     }
 }

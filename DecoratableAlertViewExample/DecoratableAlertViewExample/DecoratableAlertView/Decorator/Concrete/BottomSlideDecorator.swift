@@ -17,6 +17,8 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
     
     public var alertView: AlertViewProtocol?
     
+    public var constraintModel: ConstraintModel?
+    
     public var onClose: (() -> Void)?
     
     public var closeTappedAround: Bool = true

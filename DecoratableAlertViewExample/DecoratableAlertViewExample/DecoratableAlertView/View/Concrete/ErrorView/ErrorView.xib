@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,12 +25,23 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TnE-kz-Apy">
+                    <rect key="frame" x="387" y="7" width="30" height="30"/>
+                    <state key="normal" title="X">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="btnClose:" destination="-1" eventType="touchUpInside" id="djP-P4-M2I"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="TnE-kz-Apy" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="7" id="7ZM-AF-TAv"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hI9-Xq-Tk1" secondAttribute="trailing" constant="24" id="YCE-q2-Xbw"/>
                 <constraint firstItem="hI9-Xq-Tk1" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="bJW-eW-oBw"/>
                 <constraint firstItem="hI9-Xq-Tk1" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="eLk-1G-R0N"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TnE-kz-Apy" secondAttribute="trailing" constant="24" id="yjl-Qs-E3y"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
