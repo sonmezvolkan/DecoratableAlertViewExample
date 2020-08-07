@@ -13,7 +13,7 @@ public protocol AlertViewDecoratorProtocol: class {
     
     var mainView: UIView? { get set }
     
-    var containerView: UIView? { get set }
+    var containerView: UIView { get set }
     
     var alertView: AlertViewProtocol? { get set }
     
@@ -22,6 +22,8 @@ public protocol AlertViewDecoratorProtocol: class {
     var onClose: (() -> Void)? { get set }
     
     var canMove: Bool { get set }
+    
+    var blockUserInteractions: Bool { get set }
     
     var closeTappedAround: Bool { get set }
     
@@ -34,11 +36,5 @@ public protocol AlertViewDecoratorProtocol: class {
     func openingAnimate()
     
     func closingAnimate()
-    
-    func touchesBegan(touches: Set<UITouch>, event: UIEvent?)
-    
-    func touchesMoved(touches: Set<UITouch>, event: UIEvent?)
-    
-    func touchesEnd(touches: Set<UITouch>, event: UIEvent?)
     
 }

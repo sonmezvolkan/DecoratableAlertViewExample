@@ -51,4 +51,8 @@ public class ErrorView: UIView, AlertViewProtocol {
     @IBAction func btnClose(_ sender: Any) {
         onClose?()
     }
+    
+    public func resizeView() {
+        
+    }
 }

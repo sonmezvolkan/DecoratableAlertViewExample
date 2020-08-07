@@ -9,7 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    private var countIndex: Int = 0
+    @IBOutlet weak var lblCount: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -19,15 +22,18 @@ class ViewController: UIViewController {
         let errorView = ErrorView()
         errorView.size = CGSize(width: 200, height: 80)
         errorView.setErrorMessage(text: "Volkan")
-        let builder = DecoratableAlertViewController.Builder(alertView: errorView,
-                                             alertDecorator: BottomSlideDecorator())
+        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: TopSlideDecorator())
+            .setAutoCloseTimeLimit(limit: 3)
+            .setCanMove(canMove: true)
+            .setAnimationTime(animationTime: 0.4)
+            .build()
         
-        builder.setCanMove(canMove: true)
-        builder.setAutoCloseTimeLimit(limit: 5)
-        builder.setLeadingConstrint(constant: 36)
-        builder.setTrailingConstraint(constant: 36)
-        builder.setTopConstraint(constant: 80)
-        builder.show()
+        showDecoratableAlertView(dataSource: dataSource)
+        
+    }
+    @IBAction func btnCounter(_ sender: Any) {
+        countIndex += 1
+        lblCount.text = String(countIndex)
     }
 }
 

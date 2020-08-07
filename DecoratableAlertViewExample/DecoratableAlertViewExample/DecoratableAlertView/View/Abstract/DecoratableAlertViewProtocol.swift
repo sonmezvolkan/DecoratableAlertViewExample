@@ -16,5 +16,7 @@ public protocol AlertViewProtocol where Self: UIView {
     var onClose: (() -> Void)? { get set }
     
     var containerViewBackgroundColor: UIColor? { get set }
+    
+    func resizeView()
 }
 
