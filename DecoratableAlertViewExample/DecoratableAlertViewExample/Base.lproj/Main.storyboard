@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,14 +23,33 @@
                                     <action selector="btnShow:" destination="BYZ-38-t0r" eventType="touchUpInside" id="im0-ro-QGM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tf3-Mf-4Io">
+                                <rect key="frame" x="179" y="544" width="56" height="30"/>
+                                <state key="normal" title="Counter"/>
+                                <connections>
+                                    <action selector="btnCounter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1nv-iu-goL"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idh-Hh-6dK">
+                                <rect key="frame" x="186" y="503" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="idh-Hh-6dK" firstAttribute="top" secondItem="uTj-Vb-1Nf" secondAttribute="bottom" constant="35" id="C9u-el-NdP"/>
+                            <constraint firstItem="tf3-Mf-4Io" firstAttribute="top" secondItem="uTj-Vb-1Nf" secondAttribute="bottom" constant="76" id="GSA-O0-b01"/>
+                            <constraint firstItem="tf3-Mf-4Io" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="LZ7-j0-gaf"/>
                             <constraint firstItem="uTj-Vb-1Nf" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hNa-VB-yHD"/>
                             <constraint firstItem="uTj-Vb-1Nf" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="hre-Ls-QVs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="lblCount" destination="idh-Hh-6dK" id="dpK-Rh-x3R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

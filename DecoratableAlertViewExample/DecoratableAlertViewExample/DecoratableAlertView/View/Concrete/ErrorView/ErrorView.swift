@@ -62,4 +62,12 @@ public class ErrorView: UIView, AlertViewProtocol {
         print("self frame: \(self.frame)")
         print("self frame: \(self.contentView.frame)")
     }
+    
+    @IBAction func btnClose(_ sender: Any) {
+        onClose?()
+    }
+    
+    public func resizeView() {
+        
+    }
 }

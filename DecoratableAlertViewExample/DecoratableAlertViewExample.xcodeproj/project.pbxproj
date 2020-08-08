@@ -10,6 +10,10 @@
 		3326802224DBEECE005647BE /* ConstraintModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802124DBEECE005647BE /* ConstraintModel.swift */; };
 		3326802424DBEFA8005647BE /* LeftSlideDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802324DBEFA8005647BE /* LeftSlideDecorator.swift */; };
 		3326802624DBEFB5005647BE /* RightSlideDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802524DBEFB5005647BE /* RightSlideDecorator.swift */; };
+		3326802824DBF8C7005647BE /* FadeInDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802724DBF8C7005647BE /* FadeInDecorator.swift */; };
+		3326802A24DD35B7005647BE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802924DD35B7005647BE /* UIViewController+Extension.swift */; };
+		3326802D24DD3605005647BE /* DecoratableContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802C24DD3605005647BE /* DecoratableContext.swift */; };
+		3326803324DD737D005647BE /* DecoratableAlertViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326803224DD737D005647BE /* DecoratableAlertViewDataSource.swift */; };
 		E704ADE224DB1C88002CFC56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADE124DB1C88002CFC56 /* AppDelegate.swift */; };
 		E704ADE624DB1C88002CFC56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADE524DB1C88002CFC56 /* ViewController.swift */; };
 		E704ADE924DB1C88002CFC56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E704ADE724DB1C88002CFC56 /* Main.storyboard */; };
@@ -21,7 +25,6 @@
 		E704AE0424DB2109002CFC56 /* DecoratableAlertViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704AE0324DB2109002CFC56 /* DecoratableAlertViewProtocol.swift */; };
 		E704AE0824DB2142002CFC56 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704AE0724DB2142002CFC56 /* ErrorView.swift */; };
 		E704AE0A24DB215F002CFC56 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E704AE0924DB215F002CFC56 /* ErrorView.xib */; };
-		E704AE0C24DB2303002CFC56 /* DecoratableAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704AE0B24DB2303002CFC56 /* DecoratableAlertViewController.swift */; };
 		E704AE1024DB24AF002CFC56 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704AE0F24DB24AF002CFC56 /* UIDevice+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +32,10 @@
 		3326802124DBEECE005647BE /* ConstraintModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintModel.swift; sourceTree = "<group>"; };
 		3326802324DBEFA8005647BE /* LeftSlideDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSlideDecorator.swift; sourceTree = "<group>"; };
 		3326802524DBEFB5005647BE /* RightSlideDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightSlideDecorator.swift; sourceTree = "<group>"; };
+		3326802724DBF8C7005647BE /* FadeInDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeInDecorator.swift; sourceTree = "<group>"; };
+		3326802924DD35B7005647BE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		3326802C24DD3605005647BE /* DecoratableContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratableContext.swift; sourceTree = "<group>"; };
+		3326803224DD737D005647BE /* DecoratableAlertViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratableAlertViewDataSource.swift; sourceTree = "<group>"; };
 		E704ADDE24DB1C88002CFC56 /* DecoratableAlertViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DecoratableAlertViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E704ADE124DB1C88002CFC56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E704ADE524DB1C88002CFC56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,7 +49,6 @@
 		E704AE0324DB2109002CFC56 /* DecoratableAlertViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratableAlertViewProtocol.swift; sourceTree = "<group>"; };
 		E704AE0724DB2142002CFC56 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		E704AE0924DB215F002CFC56 /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
-		E704AE0B24DB2303002CFC56 /* DecoratableAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratableAlertViewController.swift; sourceTree = "<group>"; };
 		E704AE0F24DB24AF002CFC56 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +69,23 @@
 				3326802124DBEECE005647BE /* ConstraintModel.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		3326802B24DD35CC005647BE /* Attachment */ = {
+			isa = PBXGroup;
+			children = (
+				3326802924DD35B7005647BE /* UIViewController+Extension.swift */,
+				3326802C24DD3605005647BE /* DecoratableContext.swift */,
+			);
+			name = Attachment;
+			sourceTree = "<group>";
+		};
+		3326802E24DD7337005647BE /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				3326803224DD737D005647BE /* DecoratableAlertViewDataSource.swift */,
+			);
+			name = DataSource;
 			sourceTree = "<group>";
 		};
 		E704ADD524DB1C88002CFC56 = {
@@ -130,6 +153,7 @@
 				E704ADFD24DB1ECA002CFC56 /* BottomSlideDecorator.swift */,
 				3326802324DBEFA8005647BE /* LeftSlideDecorator.swift */,
 				3326802524DBEFB5005647BE /* RightSlideDecorator.swift */,
+				3326802724DBF8C7005647BE /* FadeInDecorator.swift */,
 			);
 			path = Concrete;
 			sourceTree = "<group>";
@@ -137,8 +161,9 @@
 		E704AE0024DB20E1002CFC56 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3326802E24DD7337005647BE /* DataSource */,
+				3326802B24DD35CC005647BE /* Attachment */,
 				3326802024DBEEBE005647BE /* Model */,
-				E704AE0B24DB2303002CFC56 /* DecoratableAlertViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -258,13 +283,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E704AE0424DB2109002CFC56 /* DecoratableAlertViewProtocol.swift in Sources */,
+				3326803324DD737D005647BE /* DecoratableAlertViewDataSource.swift in Sources */,
 				E704ADFC24DB1E98002CFC56 /* TopSlideDecorator.swift in Sources */,
 				E704ADE624DB1C88002CFC56 /* ViewController.swift in Sources */,
 				E704ADFE24DB1ECA002CFC56 /* BottomSlideDecorator.swift in Sources */,
+				3326802A24DD35B7005647BE /* UIViewController+Extension.swift in Sources */,
 				3326802224DBEECE005647BE /* ConstraintModel.swift in Sources */,
 				E704AE1024DB24AF002CFC56 /* UIDevice+Extension.swift in Sources */,
 				3326802624DBEFB5005647BE /* RightSlideDecorator.swift in Sources */,
-				E704AE0C24DB2303002CFC56 /* DecoratableAlertViewController.swift in Sources */,
+				3326802824DBF8C7005647BE /* FadeInDecorator.swift in Sources */,
+				3326802D24DD3605005647BE /* DecoratableContext.swift in Sources */,
 				E704AE0824DB2142002CFC56 /* ErrorView.swift in Sources */,
 				E704ADE224DB1C88002CFC56 /* AppDelegate.swift in Sources */,
 				E704ADF924DB1E2E002CFC56 /* AlertViewDecoratorProtocol.swift in Sources */,

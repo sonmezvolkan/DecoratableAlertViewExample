@@ -11,7 +11,7 @@ import UIKit
 
 public class ConstraintModel {
     
-    public var leadingConstrint: CGFloat?
+    public var leadingConstraint: CGFloat?
     public var trailingCosntraint: CGFloat?
     public var topConstraint: CGFloat?
     public var bottomConstraint: CGFloat?
@@ -20,8 +20,8 @@ public class ConstraintModel {
         
     }
     
-    public init(leadingConstrint: CGFloat?, trailingCosntraint: CGFloat?, topConstraint: CGFloat?, bottomConstraint: CGFloat?) {
-        self.leadingConstrint = leadingConstrint
+    public init(leadingConstraint: CGFloat?, trailingCosntraint: CGFloat?, topConstraint: CGFloat?, bottomConstraint: CGFloat?) {
+        self.leadingConstraint = leadingConstraint
         self.trailingCosntraint = trailingCosntraint
         self.topConstraint = topConstraint
         self.bottomConstraint = bottomConstraint
