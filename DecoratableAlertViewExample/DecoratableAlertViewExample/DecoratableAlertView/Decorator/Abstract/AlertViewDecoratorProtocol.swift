@@ -15,6 +15,8 @@ public protocol AlertViewDecoratorProtocol: class {
     
     var containerView: UIView { get set }
     
+    var shadowView: UIView? { get set }
+    
     var alertView: AlertViewProtocol? { get set }
     
     var constraintModel: ConstraintModel? { get set }
@@ -30,6 +32,8 @@ public protocol AlertViewDecoratorProtocol: class {
     var animationTime: TimeInterval { get set }
     
     var closeableZoneRatio: CGFloat { get set }
+    
+    var shadowViewAlphaValue: CGFloat { get set }
     
     func setConstraints()
     

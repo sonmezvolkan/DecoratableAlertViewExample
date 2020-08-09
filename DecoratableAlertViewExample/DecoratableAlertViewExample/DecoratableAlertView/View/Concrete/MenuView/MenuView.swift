@@ -1,22 +1,21 @@
 //
-//  ErrorView.swift
+//  MenuView.swift
 //  DecoratableAlertViewExample
 //
-//  Created by Volkan Sönmez on 5.08.2020.
+//  Created by Volkan Sönmez on 9.08.2020.
 //  Copyright © 2020 Volkan Sönmez. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-public class ErrorView: UIView, AlertViewProtocol {
+public class MenuView: UIView, AlertViewProtocol {
     
     public var onClose: (() -> Void)?
     
-    public var containerViewBackgroundColor: UIColor? = .red
+    public var containerViewBackgroundColor: UIColor?
     
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var lbl: UILabel!
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,7 +27,7 @@ public class ErrorView: UIView, AlertViewProtocol {
     }
     
     private func setUp() {
-        Bundle.main.loadNibNamed("ErrorView", owner: self, options: nil)
+        Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(contentView)
@@ -40,17 +39,5 @@ public class ErrorView: UIView, AlertViewProtocol {
     
     public override class var requiresConstraintBasedLayout: Bool {
         return true
-    }
-    
-    public func setErrorMessage(text: String) {
-        lbl.text = text
-        setNeedsLayout()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        self.translatesAutoresizingMaskIntoConstraints = false
-        setNeedsUpdateConstraints()
-    }
-    
-    @IBAction func btnClose(_ sender: Any) {
-        onClose?()
     }
 }

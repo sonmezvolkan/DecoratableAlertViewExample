@@ -15,6 +15,8 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     
     public var containerView = UIView()
     
+    public var shadowView: UIView?
+    
     public var alertView: AlertViewProtocol?
     
     public var constraintModel: ConstraintModel?
@@ -33,8 +35,9 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     
     public var animationTime: TimeInterval = 0.4
     
-    private var isMoving: Bool = false
-    private var isProcessing: Bool = false
+    public var shadowViewAlphaValue: CGFloat = 0.4
+    
+    private var isInAnimating: Bool = true
     
     private var topConstraint: NSLayoutConstraint?
     
@@ -50,6 +53,7 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     
     public func setConstraints() {
         guard let mainView = self.mainView, let alertView = self.alertView else { return }
+        addShadowViewIfNeeded()
         mainView.addSubview(containerView)
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,134 +69,96 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
         
         let topConstraint: CGFloat = UIDevice.current.hasNotch ? 20 : 0
         
-        containerView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         alertView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         alertView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         alertView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: topConstraint).isActive = true
         alertView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         
-        containerView.setNeedsLayout()
-        containerView.setNeedsUpdateConstraints()
+        alertView.resizeView()
+        addPanGestureRecognizerIfNeeded()
         
         mainView.layoutIfNeeded()
     }
     
-    private func setContainerViewConstraints() {
-        
+    private func addShadowViewIfNeeded() {
+        guard let mainView = self.mainView, blockUserInteractions else { return }
+        shadowView = UIView()
+        shadowView!.frame = mainView.frame
+        shadowView!.backgroundColor = .black
+        shadowView!.alpha = shadowViewAlphaValue
+        shadowView!.isUserInteractionEnabled = true
+        shadowView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tappedAround)))
+        mainView.addSubview(shadowView!)
+    }
+    
+    @objc private func tappedAround() {
+        if !closeTappedAround { return }
+        closingAnimate()
     }
     
     public func openingAnimate() {
         self.containerView.transform = CGAffineTransform(translationX: 0, y: -self.containerView.frame.height)
         UIView.animate(withDuration: animationTime, animations: {
             self.containerView.transform = CGAffineTransform(translationX: 0, y: 0)
+        }, completion: { isFinished in
+            self.isInAnimating = false
         })
     }
     
     public func closingAnimate() {
+        isInAnimating = true
         UIView.animate(withDuration: animationTime, animations: {
             self.containerView.transform = CGAffineTransform(translationX: 0, y: -self.containerView.frame.height)
+            self.shadowView?.alpha = 0
         }, completion: { isFinished in
             self.containerView.removeFromSuperview()
+            self.shadowView?.removeFromSuperview()
+            self.isInAnimating = false
         })
     }
     
-//    public func openingAnimate() {
-//        guard let customView = self.containerView else { return }
-//        customView.alpha = 0.0
-//        customView.frame.origin.y -= customView.frame.height
-//
-//        UIView.animate(withDuration: animationTime, animations: {
-//            customView.alpha = 1.0
-//            customView.frame.origin.y = 0
-//        })
-//    }
-//
-//    public func closingAnimate() {
-//        guard let customView = self.containerView else { return }
-//        isProcessing = true
-//        UIView.animate(withDuration: animationTime, animations: {
-//            customView.frame.origin.y -= customView.frame.height
-//            customView.alpha = 0.0
-//        }) { [weak self] (_) in
-//            self?.containerView = nil
-//            self?.onClose?()
-//        }
-//    }
-//
-//    private func checkViewLocation(touch: UITouch) -> Bool {
-//        guard let customView = self.containerView, let mainView = self.mainView else { return false}
-//        let location = touch.location(in: mainView)
-//
-//        if location.x >= customView.frame.origin.x && location.x <= customView.frame.origin.x + customView.frame.width {
-//            if location.y >= customView.frame.origin.y && location.y <= customView.frame.origin.y + customView.frame.height {
-//                return true
-//            }
-//        }
-//
-//        return false
-//    }
-//
-//    public func touchesBegan(touches: Set<UITouch>, event: UIEvent?) {
-//        guard let touch = touches.first else { return }
-//
-//        let touchIsInCustomView = checkViewLocation(touch: touch)
-//        if closeTappedAround && !touchIsInCustomView {
-//            isProcessing = true
-//            closingAnimate()
-//        }
-//
-//        if canMove && touchIsInCustomView {
-//            touchBeganPosition = touch.location(in: mainView)
-//            isMoving = true
-//        }
-//    }
-//
-//    public func touchesMoved(touches: Set<UITouch>, event: UIEvent?) {
-//        guard let customView = self.containerView else { return }
-//        guard let touch = touches.first else { return }
-//        guard let touchBeganPosition = self.touchBeganPosition else { return }
-//        guard let mainView = self.mainView else { return }
-//        if isProcessing { return }
-//
-//        if isMoving && checkViewLocation(touch: touch) {
-//            let currentTouchLocation = touch.location(in: mainView)
-//            let distanceY = touchBeganPosition.y - currentTouchLocation.y
-//
-//            if distanceY >= 0 && distanceY <= customView.frame.height {
-//                customView.frame.origin.y = -distanceY
-//
-//                if customView.frame.origin.y <= customView.frame.height / -2 {
-//                    closingAnimate()
-//                }
-//            }
-//        }
-//    }
-//
-//    public func touchesEnd(touches: Set<UITouch>, event: UIEvent?) {
-//        guard let customView = self.containerView, let touch = touches.first, let mainView = self.mainView,
-//            let touchBeganPosition = self.touchBeganPosition, !isProcessing else { return }
-//
-//        if checkViewLocation(touch: touch) {
-//            let currentTouchLocation = touch.location(in: mainView)
-//            let distanceY = currentTouchLocation.y - touchBeganPosition.y
-//
-//            if distanceY > customView.frame.height * closeableZoneRatio {
-//                resetCustomViewPosition(customView: customView, mainView: mainView)
-//            }
-//        } else {
-//            resetCustomViewPosition(customView: customView, mainView: mainView)
-//        }
-//
-//        isMoving = false
-//        self.touchBeganPosition = nil
-//    }
-//
-//    private func resetCustomViewPosition(customView: UIView, mainView: UIView) {
-//        isProcessing = true
-//        UIView.animate(withDuration: animationTime / 2, animations: {
-//            customView.frame.origin.y = 0
-//        }, completion: { [weak self] _ in
-//            self?.isProcessing = false
-//        })
-//    }
+    private func addPanGestureRecognizerIfNeeded() {
+        if !canMove { return }
+        
+        alertView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(panGesture:))))
+    }
+    
+    @objc private func handlePan(panGesture: UIPanGestureRecognizer) {
+        guard let mainView = self.mainView, !isInAnimating else { return }
+        if panGesture.state == .began || panGesture.state == .changed {
+            let translation = panGesture.translation(in: self.mainView)
+            if translation.y > 0 { return }
+            
+            containerView.transform = CGAffineTransform(translationX: 0, y: translation.y)
+            
+            if -translation.y >= containerView.frame.height * closeableZoneRatio {
+                closingAnimate()
+            }
+            
+        } else if panGesture.state == .ended {
+            if checkVelocity(velocity: panGesture.velocity(in: mainView)) {
+                return
+            }
+            
+            handlePanEnd()
+        }
+    }
+    
+    private func handlePanEnd() {
+        if containerView.frame.origin.y == 0 { return }
+        print(containerView.frame.origin.y)
+        isInAnimating = true
+        UIView.animate(withDuration: animationTime / 2, animations: {
+            self.containerView.transform = .identity
+        }, completion: { isFinished in
+            self.isInAnimating = false
+        })
+    }
+    
+    private func checkVelocity(velocity: CGPoint) -> Bool {
+        if velocity.y > -600 { return false }
+        animationTime /= 2
+        closingAnimate()
+        return true
+    }
 }

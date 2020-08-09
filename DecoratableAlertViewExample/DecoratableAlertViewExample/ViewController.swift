@@ -20,12 +20,18 @@ class ViewController: UIViewController {
     
     @IBAction func btnShow(_ sender: Any) {
         let errorView = ErrorView()
-        errorView.size = CGSize(width: 200, height: 80)
-        errorView.setErrorMessage(text: "Volkan")
-        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: TopSlideDecorator())
-            .setAutoCloseTimeLimit(limit: 3)
+        errorView.setErrorMessage(text: "Volkan\nVolkan\nDeneme\nDeneme 2\nVa\na\nafa\nasda\nfsdf\n")
+        
+        let menuView = MenuView()
+        
+        
+        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: menuView, alertDecorator: LeftSlideDecorator())
+            .setAutoCloseTimeLimit(limit: 30)
             .setCanMove(canMove: true)
             .setAnimationTime(animationTime: 0.4)
+            .setBlockUserInteractions(isEnabled: true)
+            .setCloseTappedAround(isEnabled: true)
+            .setClosableZoneRatio(ratio: 0.7)
             .build()
         
         showDecoratableAlertView(dataSource: dataSource)

@@ -64,6 +64,12 @@ public class DecoratableAlertViewDataSource {
             self.alertDecorator.blockUserInteractions = isEnabled
             return self
         }
+        
+        @discardableResult
+        public func setShadowViewAlphaValue(value: CGFloat) -> Builder {
+            self.alertDecorator.shadowViewAlphaValue = value
+            return self
+        }
 
         @discardableResult
         public func setClosableZoneRatio(ratio: CGFloat) -> Builder {
