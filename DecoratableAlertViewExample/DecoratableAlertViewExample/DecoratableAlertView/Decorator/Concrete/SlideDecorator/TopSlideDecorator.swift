@@ -1,16 +1,16 @@
 //
-//  LeftSlideDecorator.swift
+//  TopSlideDecorator.swift
 //  DecoratableAlertViewExample
 //
-//  Created by Volkan SÖNMEZ on 6.08.2020.
+//  Created by Volkan Sönmez on 5.08.2020.
 //  Copyright © 2020 Volkan Sönmez. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-public class LeftSlideDecorator: AlertViewDecoratorProtocol {
-    
+public class TopSlideDecorator: AlertViewDecoratorProtocol {
+
     public var mainView: UIView?
     
     public var containerView = UIView()
@@ -39,6 +39,8 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
     
     private var isInAnimating: Bool = true
     
+    private var topConstraint: NSLayoutConstraint?
+    
     public init() {
         self.canMove = true
         self.animationTime = 0.4
@@ -56,17 +58,20 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor).isActive = true
-        containerView.topAnchor.constraint(equalTo: mainView.topAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor).isActive = true
+        self.topConstraint = containerView.topAnchor.constraint(equalTo: mainView.topAnchor)
+        self.topConstraint?.isActive = true
         
         containerView.backgroundColor = alertView.containerViewBackgroundColor
         
         containerView.addSubview(alertView)
         alertView.translatesAutoresizingMaskIntoConstraints = false
         
+        let topConstraint: CGFloat = UIDevice.current.hasNotch ? 20 : 0
+        
         alertView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         alertView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        alertView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        alertView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: topConstraint).isActive = true
         alertView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         
         alertView.resizeView()
@@ -79,8 +84,12 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
         guard let mainView = self.mainView, blockUserInteractions else { return }
         shadowView = UIView()
         shadowView!.frame = mainView.frame
-        shadowView!.backgroundColor = .black
-        shadowView!.alpha = shadowViewAlphaValue
+        if shadowViewAlphaValue > 0 {
+            shadowView!.backgroundColor = .black
+            shadowView!.alpha = shadowViewAlphaValue
+        } else {
+            shadowView?.backgroundColor = .clear
+        }
         shadowView!.isUserInteractionEnabled = true
         shadowView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tappedAround)))
         mainView.addSubview(shadowView!)
@@ -92,7 +101,7 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
     }
     
     public func openingAnimate() {
-        self.containerView.transform = CGAffineTransform(translationX: -containerView.frame.width, y: 0)
+        self.containerView.transform = CGAffineTransform(translationX: 0, y: -self.containerView.frame.height)
         UIView.animate(withDuration: animationTime, animations: {
             self.containerView.transform = CGAffineTransform(translationX: 0, y: 0)
         }, completion: { isFinished in
@@ -103,7 +112,7 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
     public func closingAnimate() {
         isInAnimating = true
         UIView.animate(withDuration: animationTime, animations: {
-            self.containerView.transform = CGAffineTransform(translationX: -self.containerView.frame.width, y: 0)
+            self.containerView.transform = CGAffineTransform(translationX: 0, y: -self.containerView.frame.height)
             self.shadowView?.alpha = 0
         }, completion: { isFinished in
             self.containerView.removeFromSuperview()
@@ -122,11 +131,11 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
         guard let mainView = self.mainView, !isInAnimating else { return }
         if panGesture.state == .began || panGesture.state == .changed {
             let translation = panGesture.translation(in: self.mainView)
-            if translation.x > 0 { return }
+            if translation.y > 0 { return }
             
-            containerView.transform = CGAffineTransform(translationX: translation.x, y: 0)
+            containerView.transform = CGAffineTransform(translationX: 0, y: translation.y)
             
-            if -translation.x >= containerView.frame.width * closeableZoneRatio {
+            if -translation.y >= containerView.frame.height * closeableZoneRatio {
                 closingAnimate()
             }
             
@@ -140,7 +149,8 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
     }
     
     private func handlePanEnd() {
-        if containerView.frame.origin.x == 0 { return }
+        if containerView.frame.origin.y == 0 { return }
+        print(containerView.frame.origin.y)
         isInAnimating = true
         UIView.animate(withDuration: animationTime / 2, animations: {
             self.containerView.transform = .identity
@@ -150,8 +160,7 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
     }
     
     private func checkVelocity(velocity: CGPoint) -> Bool {
-        print(velocity.x)
-        if velocity.x > -600 { return false }
+        if velocity.y > -600 { return false }
         animationTime /= 2
         closingAnimate()
         return true

@@ -14,6 +14,7 @@
 		3326802A24DD35B7005647BE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802924DD35B7005647BE /* UIViewController+Extension.swift */; };
 		3326802D24DD3605005647BE /* DecoratableContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802C24DD3605005647BE /* DecoratableContext.swift */; };
 		3326803324DD737D005647BE /* DecoratableAlertViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326803224DD737D005647BE /* DecoratableAlertViewDataSource.swift */; };
+		33921DA824E12E1700FCAD38 /* TopScalingDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33921DA724E12E1700FCAD38 /* TopScalingDecorator.swift */; };
 		E704ADE224DB1C88002CFC56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADE124DB1C88002CFC56 /* AppDelegate.swift */; };
 		E704ADE624DB1C88002CFC56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADE524DB1C88002CFC56 /* ViewController.swift */; };
 		E704ADE924DB1C88002CFC56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E704ADE724DB1C88002CFC56 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		3326802924DD35B7005647BE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		3326802C24DD3605005647BE /* DecoratableContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratableContext.swift; sourceTree = "<group>"; };
 		3326803224DD737D005647BE /* DecoratableAlertViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratableAlertViewDataSource.swift; sourceTree = "<group>"; };
+		33921DA724E12E1700FCAD38 /* TopScalingDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopScalingDecorator.swift; sourceTree = "<group>"; };
 		E704ADDE24DB1C88002CFC56 /* DecoratableAlertViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DecoratableAlertViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E704ADE124DB1C88002CFC56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E704ADE524DB1C88002CFC56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,40 @@
 				3326803224DD737D005647BE /* DecoratableAlertViewDataSource.swift */,
 			);
 			name = DataSource;
+			sourceTree = "<group>";
+		};
+		33921DA324E12DC200FCAD38 /* SlideDecorator */ = {
+			isa = PBXGroup;
+			children = (
+				E704ADFB24DB1E98002CFC56 /* TopSlideDecorator.swift */,
+				3326802524DBEFB5005647BE /* RightSlideDecorator.swift */,
+				3326802324DBEFA8005647BE /* LeftSlideDecorator.swift */,
+				E704ADFD24DB1ECA002CFC56 /* BottomSlideDecorator.swift */,
+			);
+			path = SlideDecorator;
+			sourceTree = "<group>";
+		};
+		33921DA424E12DD400FCAD38 /* FadeInDecorator */ = {
+			isa = PBXGroup;
+			children = (
+				3326802724DBF8C7005647BE /* FadeInDecorator.swift */,
+			);
+			path = FadeInDecorator;
+			sourceTree = "<group>";
+		};
+		33921DA524E12DDE00FCAD38 /* CustomableDecorator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomableDecorator;
+			sourceTree = "<group>";
+		};
+		33921DA624E12DF800FCAD38 /* ScalingDecorator */ = {
+			isa = PBXGroup;
+			children = (
+				33921DA724E12E1700FCAD38 /* TopScalingDecorator.swift */,
+			);
+			path = ScalingDecorator;
 			sourceTree = "<group>";
 		};
 		E704ADD524DB1C88002CFC56 = {
@@ -153,11 +189,10 @@
 		E704ADFA24DB1E43002CFC56 /* Concrete */ = {
 			isa = PBXGroup;
 			children = (
-				E704ADFB24DB1E98002CFC56 /* TopSlideDecorator.swift */,
-				E704ADFD24DB1ECA002CFC56 /* BottomSlideDecorator.swift */,
-				3326802324DBEFA8005647BE /* LeftSlideDecorator.swift */,
-				3326802524DBEFB5005647BE /* RightSlideDecorator.swift */,
-				3326802724DBF8C7005647BE /* FadeInDecorator.swift */,
+				33921DA624E12DF800FCAD38 /* ScalingDecorator */,
+				33921DA524E12DDE00FCAD38 /* CustomableDecorator */,
+				33921DA324E12DC200FCAD38 /* SlideDecorator */,
+				33921DA424E12DD400FCAD38 /* FadeInDecorator */,
 			);
 			path = Concrete;
 			sourceTree = "<group>";
@@ -304,6 +339,7 @@
 				E704ADFE24DB1ECA002CFC56 /* BottomSlideDecorator.swift in Sources */,
 				3326802A24DD35B7005647BE /* UIViewController+Extension.swift in Sources */,
 				3326802224DBEECE005647BE /* ConstraintModel.swift in Sources */,
+				33921DA824E12E1700FCAD38 /* TopScalingDecorator.swift in Sources */,
 				E704AE1024DB24AF002CFC56 /* UIDevice+Extension.swift in Sources */,
 				3326802624DBEFB5005647BE /* RightSlideDecorator.swift in Sources */,
 				E75A066B24E058C9008A3DDC /* MenuView.swift in Sources */,

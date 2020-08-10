@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public class ErrorView: UIView, AlertViewProtocol {
-    
+
     public var onClose: (() -> Void)?
     
     public var containerViewBackgroundColor: UIColor? = .red
@@ -31,6 +31,7 @@ public class ErrorView: UIView, AlertViewProtocol {
         Bundle.main.loadNibNamed("ErrorView", owner: self, options: nil)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        contentView.backgroundColor = .red
         addSubview(contentView)
     }
     

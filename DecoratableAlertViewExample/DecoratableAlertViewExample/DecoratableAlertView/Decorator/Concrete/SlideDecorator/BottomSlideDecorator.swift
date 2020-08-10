@@ -79,8 +79,12 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
         guard let mainView = self.mainView, blockUserInteractions else { return }
         shadowView = UIView()
         shadowView!.frame = mainView.frame
-        shadowView!.backgroundColor = .black
-        shadowView!.alpha = shadowViewAlphaValue
+        if shadowViewAlphaValue > 0 {
+            shadowView!.backgroundColor = .black
+            shadowView!.alpha = shadowViewAlphaValue
+        } else {
+            shadowView?.backgroundColor = .clear
+        }
         shadowView!.isUserInteractionEnabled = true
         shadowView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tappedAround)))
         mainView.addSubview(shadowView!)

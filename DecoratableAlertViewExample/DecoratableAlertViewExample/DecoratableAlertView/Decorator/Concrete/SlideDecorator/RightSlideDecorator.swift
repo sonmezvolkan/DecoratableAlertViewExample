@@ -1,16 +1,16 @@
 //
-//  TopSlideDecorator.swift
+//  RightSlideDecorator.swift
 //  DecoratableAlertViewExample
 //
-//  Created by Volkan Sönmez on 5.08.2020.
+//  Created by Volkan SÖNMEZ on 6.08.2020.
 //  Copyright © 2020 Volkan Sönmez. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-public class TopSlideDecorator: AlertViewDecoratorProtocol {
-
+public class RightSlideDecorator: AlertViewDecoratorProtocol {
+    
     public var mainView: UIView?
     
     public var containerView = UIView()
@@ -39,8 +39,6 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     
     private var isInAnimating: Bool = true
     
-    private var topConstraint: NSLayoutConstraint?
-    
     public init() {
         self.canMove = true
         self.animationTime = 0.4
@@ -57,21 +55,18 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
         mainView.addSubview(containerView)
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor).isActive = true
-        self.topConstraint = containerView.topAnchor.constraint(equalTo: mainView.topAnchor)
-        self.topConstraint?.isActive = true
+        containerView.topAnchor.constraint(equalTo: mainView.topAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor).isActive = true
         
         containerView.backgroundColor = alertView.containerViewBackgroundColor
         
         containerView.addSubview(alertView)
         alertView.translatesAutoresizingMaskIntoConstraints = false
         
-        let topConstraint: CGFloat = UIDevice.current.hasNotch ? 20 : 0
-        
         alertView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         alertView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        alertView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: topConstraint).isActive = true
+        alertView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         alertView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         
         alertView.resizeView()
@@ -84,8 +79,12 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
         guard let mainView = self.mainView, blockUserInteractions else { return }
         shadowView = UIView()
         shadowView!.frame = mainView.frame
-        shadowView!.backgroundColor = .black
-        shadowView!.alpha = shadowViewAlphaValue
+        if shadowViewAlphaValue > 0 {
+            shadowView!.backgroundColor = .black
+            shadowView!.alpha = shadowViewAlphaValue
+        } else {
+            shadowView?.backgroundColor = .clear
+        }
         shadowView!.isUserInteractionEnabled = true
         shadowView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tappedAround)))
         mainView.addSubview(shadowView!)
@@ -97,7 +96,7 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     }
     
     public func openingAnimate() {
-        self.containerView.transform = CGAffineTransform(translationX: 0, y: -self.containerView.frame.height)
+        self.containerView.transform = CGAffineTransform(translationX: containerView.frame.width, y: 0)
         UIView.animate(withDuration: animationTime, animations: {
             self.containerView.transform = CGAffineTransform(translationX: 0, y: 0)
         }, completion: { isFinished in
@@ -108,7 +107,7 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     public func closingAnimate() {
         isInAnimating = true
         UIView.animate(withDuration: animationTime, animations: {
-            self.containerView.transform = CGAffineTransform(translationX: 0, y: -self.containerView.frame.height)
+            self.containerView.transform = CGAffineTransform(translationX: self.containerView.frame.width, y: 0)
             self.shadowView?.alpha = 0
         }, completion: { isFinished in
             self.containerView.removeFromSuperview()
@@ -127,11 +126,12 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
         guard let mainView = self.mainView, !isInAnimating else { return }
         if panGesture.state == .began || panGesture.state == .changed {
             let translation = panGesture.translation(in: self.mainView)
-            if translation.y > 0 { return }
+            print(translation.x)
+            if translation.x < 0 { return }
             
-            containerView.transform = CGAffineTransform(translationX: 0, y: translation.y)
+            containerView.transform = CGAffineTransform(translationX: translation.x, y: 0)
             
-            if -translation.y >= containerView.frame.height * closeableZoneRatio {
+            if translation.x >= containerView.frame.width * closeableZoneRatio {
                 closingAnimate()
             }
             
@@ -145,8 +145,7 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     }
     
     private func handlePanEnd() {
-        if containerView.frame.origin.y == 0 { return }
-        print(containerView.frame.origin.y)
+        if containerView.frame.origin.x == 0 { return }
         isInAnimating = true
         UIView.animate(withDuration: animationTime / 2, animations: {
             self.containerView.transform = .identity
@@ -156,9 +155,11 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     }
     
     private func checkVelocity(velocity: CGPoint) -> Bool {
-        if velocity.y > -600 { return false }
+        print(velocity.x)
+        if velocity.x < 600 { return false }
         animationTime /= 2
         closingAnimate()
         return true
     }
+    
 }

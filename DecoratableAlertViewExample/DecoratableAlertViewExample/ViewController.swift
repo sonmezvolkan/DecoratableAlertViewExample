@@ -25,12 +25,13 @@ class ViewController: UIViewController {
         let menuView = MenuView()
         
         
-        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: menuView, alertDecorator: LeftSlideDecorator())
+        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: TopScalingDecorator())
             .setAutoCloseTimeLimit(limit: 30)
             .setCanMove(canMove: true)
             .setAnimationTime(animationTime: 0.4)
             .setBlockUserInteractions(isEnabled: true)
             .setCloseTappedAround(isEnabled: true)
+            .setShadowViewAlphaValue(value: 0)
             .setClosableZoneRatio(ratio: 0.7)
             .build()
         
