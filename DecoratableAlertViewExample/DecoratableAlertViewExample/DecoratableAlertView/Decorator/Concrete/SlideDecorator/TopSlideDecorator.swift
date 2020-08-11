@@ -42,57 +42,17 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     private var topConstraint: NSLayoutConstraint?
     
     public init() {
-        self.canMove = true
-        self.animationTime = 0.4
-    }
-    
-    public init(canMove: Bool = true, animationTime: TimeInterval = 0.4) {
-        self.canMove = canMove
-        self.animationTime = animationTime
     }
     
     public func setConstraints() {
-        guard let mainView = self.mainView, let alertView = self.alertView else { return }
-        addShadowViewIfNeeded()
-        mainView.addSubview(containerView)
+        let constraints = ConstraintModel.Builder()
+            .setLeadingConstraint(constant: 0)
+            .setTrailingCosntraint(constant: 0)
+            .setTopConstraint(constant: 0)
+            .build()
         
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor).isActive = true
-        self.topConstraint = containerView.topAnchor.constraint(equalTo: mainView.topAnchor)
-        self.topConstraint?.isActive = true
-        
-        containerView.backgroundColor = alertView.containerViewBackgroundColor
-        
-        containerView.addSubview(alertView)
-        alertView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let topConstraint: CGFloat = UIDevice.current.hasNotch ? 20 : 0
-        
-        alertView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        alertView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        alertView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: topConstraint).isActive = true
-        alertView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-        
-        alertView.resizeView()
+        setConstraints(constraintModel: constraints, selector: #selector(tappedAround))
         addPanGestureRecognizerIfNeeded()
-        
-        mainView.layoutIfNeeded()
-    }
-    
-    private func addShadowViewIfNeeded() {
-        guard let mainView = self.mainView, blockUserInteractions else { return }
-        shadowView = UIView()
-        shadowView!.frame = mainView.frame
-        if shadowViewAlphaValue > 0 {
-            shadowView!.backgroundColor = .black
-            shadowView!.alpha = shadowViewAlphaValue
-        } else {
-            shadowView?.backgroundColor = .clear
-        }
-        shadowView!.isUserInteractionEnabled = true
-        shadowView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tappedAround)))
-        mainView.addSubview(shadowView!)
     }
     
     @objc private func tappedAround() {

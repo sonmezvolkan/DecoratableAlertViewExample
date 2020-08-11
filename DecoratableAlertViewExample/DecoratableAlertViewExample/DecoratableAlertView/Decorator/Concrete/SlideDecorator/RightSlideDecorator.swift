@@ -50,44 +50,14 @@ public class RightSlideDecorator: AlertViewDecoratorProtocol {
     }
     
     public func setConstraints() {
-        guard let mainView = self.mainView, let alertView = self.alertView else { return }
-        addShadowViewIfNeeded()
-        mainView.addSubview(containerView)
+        let constraints = ConstraintModel.Builder()
+            .setTrailingCosntraint(constant: 0)
+            .setBottomConstraint(constant: 0)
+            .setTopConstraint(constant: 0)
+            .build()
         
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor).isActive = true
-        containerView.topAnchor.constraint(equalTo: mainView.topAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor).isActive = true
-        
-        containerView.backgroundColor = alertView.containerViewBackgroundColor
-        
-        containerView.addSubview(alertView)
-        alertView.translatesAutoresizingMaskIntoConstraints = false
-        
-        alertView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        alertView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        alertView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        alertView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-        
-        alertView.resizeView()
+        setConstraints(constraintModel: constraints, selector: #selector(tappedAround))
         addPanGestureRecognizerIfNeeded()
-        
-        mainView.layoutIfNeeded()
-    }
-    
-    private func addShadowViewIfNeeded() {
-        guard let mainView = self.mainView, blockUserInteractions else { return }
-        shadowView = UIView()
-        shadowView!.frame = mainView.frame
-        if shadowViewAlphaValue > 0 {
-            shadowView!.backgroundColor = .black
-            shadowView!.alpha = shadowViewAlphaValue
-        } else {
-            shadowView?.backgroundColor = .clear
-        }
-        shadowView!.isUserInteractionEnabled = true
-        shadowView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tappedAround)))
-        mainView.addSubview(shadowView!)
     }
     
     @objc private func tappedAround() {

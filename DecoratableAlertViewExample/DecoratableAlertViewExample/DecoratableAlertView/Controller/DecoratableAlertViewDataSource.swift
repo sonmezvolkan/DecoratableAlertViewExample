@@ -32,7 +32,6 @@ public class DecoratableAlertViewDataSource {
         private var autoClose: Bool = false
         private var timerLimit: Int = 15
         private var superViewBackgroundColor: UIColor = .clear
-        private var constraints: ConstraintModel?
         
         public init(alertView: AlertViewProtocol,
                     alertDecorator: AlertViewDecoratorProtocol) {
@@ -95,52 +94,7 @@ public class DecoratableAlertViewDataSource {
             self.alertDecorator.canMove = canMove
             return self
         }
-        
-        @discardableResult
-        public func setConstraints(constraints: ConstraintModel) -> Builder {
-            self.alertDecorator.constraintModel = constraints
-            return self
-        }
-        
-        @discardableResult
-        public func setLeadingConstrint(constant: CGFloat) -> Builder {
-            let constraints = getConstraints()
-            constraints.leadingConstraint = constant
-            self.alertDecorator.constraintModel = constraints
-            return self
-        }
-        
-        @discardableResult
-        public func setTrailingConstraint(constant: CGFloat) -> Builder {
-            let constraints = getConstraints()
-            constraints.trailingCosntraint = constant
-            self.alertDecorator.constraintModel = constraints
-            return self
-        }
-        
-        @discardableResult
-        public func setTopConstraint(constant: CGFloat) -> Builder {
-            let constraints = getConstraints()
-            constraints.topConstraint = constant
-            self.alertDecorator.constraintModel = constraints
-            return self
-        }
-        
-        @discardableResult
-        public func setBottomConstraint(constant: CGFloat) -> Builder {
-            let constraints = getConstraints()
-            constraints.bottomConstraint = constant
-            self.alertDecorator.constraintModel = constraints
-            return self
-        }
-        
-        private func getConstraints() -> ConstraintModel {
-            if self.constraints == nil {
-                self.constraints = ConstraintModel()
-            }
-            return self.constraints!
-        }
-        
+
         public func build() -> DecoratableAlertViewDataSource {
             return DecoratableAlertViewDataSource(decorator: alertDecorator,
                                                   autoClose: autoClose,
