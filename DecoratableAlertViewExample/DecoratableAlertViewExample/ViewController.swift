@@ -25,12 +25,11 @@ class ViewController: UIViewController {
         let menuView = MenuView()
         
         let constraints = ConstraintModel.Builder()
-            .setTopConstraint(constant: 90)
-            .setLeadingConstraint(constant: 48)
-            .setTrailingCosntraint(constant: 48)
+            .setCenterYConstraint(constant: 0)
+            .setCenterXConstraint(constant: 0)
             .build()
         
-        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: LeftSlideDecorator())
+        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: ScalingDecorator(constraints: constraints))
             .setAutoCloseTimeLimit(limit: 30)
             .setCanMove(canMove: true)
             .setAnimationTime(animationTime: 0.4)

@@ -78,11 +78,11 @@ extension AlertViewDecoratorProtocol {
         }
         
         if let centerX = constraintModel.centerXConstraint {
-            containerView.centerYAnchor.constraint(equalTo: mainView.centerYAnchor, constant: centerX).isActive = true
+            containerView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor, constant: centerX).isActive = true
         }
         
         if let centerY = constraintModel.centerYConstraint {
-            containerView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor, constant: centerY).isActive = true
+            containerView.centerYAnchor.constraint(equalTo: mainView.centerYAnchor, constant: centerY).isActive = true
         }
         
         addAlertView(topConstant: topConstantForAlertView)
