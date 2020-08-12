@@ -21,6 +21,10 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
     
     public var constraintModel: ConstraintModel?
     
+    public var animationModel: AnimationModel?
+    
+    public var createDefaultAnimationModel: (() -> AnimationModel)?
+    
     public var onClose: (() -> Void)?
     
     public var closeTappedAround: Bool = false
@@ -33,20 +37,12 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
     
     public var canMove: Bool = true
     
-    public var animationTime: TimeInterval = 0.4
-    
     public var shadowViewAlphaValue: CGFloat = 0.4
     
     private var isInAnimating: Bool = true
     
     public init() {
-        self.canMove = true
-        self.animationTime = 0.4
-    }
-    
-    public init(canMove: Bool = true, animationTime: TimeInterval = 0.4) {
-        self.canMove = canMove
-        self.animationTime = animationTime
+        
     }
     
     public func setConstraints() {
@@ -67,7 +63,7 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
     
     public func openingAnimate() {
         self.containerView.transform = CGAffineTransform(translationX: -containerView.frame.width, y: 0)
-        UIView.animate(withDuration: animationTime, animations: {
+        UIView.animate(withDuration: getAnimationModel().animationTime, animations: {
             self.containerView.transform = CGAffineTransform(translationX: 0, y: 0)
         }, completion: { isFinished in
             self.isInAnimating = false
@@ -76,7 +72,7 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
     
     public func closingAnimate() {
         isInAnimating = true
-        UIView.animate(withDuration: animationTime, animations: {
+        UIView.animate(withDuration: getAnimationModel().animationTime, animations: {
             self.containerView.transform = CGAffineTransform(translationX: -self.containerView.frame.width, y: 0)
             self.shadowView?.alpha = 0
         }, completion: { isFinished in
@@ -116,7 +112,7 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
     private func handlePanEnd() {
         if containerView.frame.origin.x == 0 { return }
         isInAnimating = true
-        UIView.animate(withDuration: animationTime / 2, animations: {
+        UIView.animate(withDuration: getAnimationModel().animationTime / 2, animations: {
             self.containerView.transform = .identity
         }, completion: { isFinished in
             self.isInAnimating = false
@@ -126,7 +122,7 @@ public class LeftSlideDecorator: AlertViewDecoratorProtocol {
     private func checkVelocity(velocity: CGPoint) -> Bool {
         print(velocity.x)
         if velocity.x > -600 { return false }
-        animationTime /= 2
+        getAnimationModel().animationTime /= 2
         closingAnimate()
         return true
     }

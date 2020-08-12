@@ -21,6 +21,16 @@ public class ScalingDecorator: AlertViewDecoratorProtocol {
     
     public var constraintModel: ConstraintModel?
     
+    public var animationModel: AnimationModel?
+    
+    public var createDefaultAnimationModel: (() -> AnimationModel)? = {
+        let animationModel = AnimationModel()
+        animationModel.initialSpringVelocity = 1
+        animationModel.usingSpringWithDamping = 0.5
+        animationModel.options = .curveEaseInOut
+        return animationModel
+    }
+    
     public var onClose: (() -> Void)?
     
     public var closeTappedAround: Bool = false
@@ -33,13 +43,9 @@ public class ScalingDecorator: AlertViewDecoratorProtocol {
     
     public var canMove: Bool = true
     
-    public var animationTime: TimeInterval = 0.4
-    
     public var shadowViewAlphaValue: CGFloat = 0.4
     
     private var isAnimating: Bool = true
-    
-    private var topConstraint: NSLayoutConstraint?
     
     public init() {
         self.constraintModel = ConstraintModel.Builder().build(type: .top)
@@ -66,16 +72,21 @@ public class ScalingDecorator: AlertViewDecoratorProtocol {
     
     public func openingAnimate() {
         self.containerView.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
-        UIView.animate(withDuration: animationTime, animations: {
+        
+        UIView.animate(withDuration: getAnimationModel().animationTime,
+                       delay: getAnimationModel().delay,
+                       usingSpringWithDamping: getAnimationModel().usingSpringWithDamping,
+                       initialSpringVelocity: getAnimationModel().initialSpringVelocity,
+                       options: getAnimationModel().options, animations: {
             self.containerView.transform = .identity
-        }, completion: { (isFinished) in
+        }, completion: { isFinished in
             self.isAnimating = false
         })
     }
     
     public func closingAnimate() {
         if isAnimating { return }
-        UIView.animate(withDuration: animationTime, animations: {
+        UIView.animate(withDuration: getAnimationModel().animationTime, animations: {
             self.containerView.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
         }, completion: { isFinished in
             self.containerView.removeFromSuperview()

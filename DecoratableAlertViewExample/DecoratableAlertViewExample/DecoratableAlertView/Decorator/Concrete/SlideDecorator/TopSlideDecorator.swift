@@ -21,6 +21,10 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     
     public var constraintModel: ConstraintModel?
     
+    public var animationModel: AnimationModel?
+    
+    public var createDefaultAnimationModel: (() -> AnimationModel)?
+    
     public var onClose: (() -> Void)?
     
     public var closeTappedAround: Bool = false
@@ -32,8 +36,6 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     public var touchBeganPosition: CGPoint?
     
     public var canMove: Bool = true
-    
-    public var animationTime: TimeInterval = 0.4
     
     public var shadowViewAlphaValue: CGFloat = 0.4
     
@@ -62,7 +64,7 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     
     public func openingAnimate() {
         self.containerView.transform = CGAffineTransform(translationX: 0, y: -self.containerView.frame.height)
-        UIView.animate(withDuration: animationTime, animations: {
+        UIView.animate(withDuration: getAnimationModel().animationTime, animations: {
             self.containerView.transform = CGAffineTransform(translationX: 0, y: 0)
         }, completion: { isFinished in
             self.isInAnimating = false
@@ -71,7 +73,7 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     
     public func closingAnimate() {
         isInAnimating = true
-        UIView.animate(withDuration: animationTime, animations: {
+        UIView.animate(withDuration: getAnimationModel().animationTime, animations: {
             self.containerView.transform = CGAffineTransform(translationX: 0, y: -self.containerView.frame.height)
             self.shadowView?.alpha = 0
         }, completion: { isFinished in
@@ -112,7 +114,7 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
         if containerView.frame.origin.y == 0 { return }
         print(containerView.frame.origin.y)
         isInAnimating = true
-        UIView.animate(withDuration: animationTime / 2, animations: {
+        UIView.animate(withDuration: getAnimationModel().animationTime / 2, animations: {
             self.containerView.transform = .identity
         }, completion: { isFinished in
             self.isInAnimating = false
@@ -121,7 +123,7 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     
     private func checkVelocity(velocity: CGPoint) -> Bool {
         if velocity.y > -600 { return false }
-        animationTime /= 2
+        getAnimationModel().animationTime /= 2
         closingAnimate()
         return true
     }

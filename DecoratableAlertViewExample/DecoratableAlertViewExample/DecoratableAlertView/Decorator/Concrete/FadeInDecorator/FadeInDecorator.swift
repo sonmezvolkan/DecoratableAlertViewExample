@@ -6,95 +6,96 @@
 //  Copyright © 2020 Volkan Sönmez. All rights reserved.
 //
 
-//import Foundation
-//import UIKit
-//
-//public class FadeInDecorator: AlertViewDecoratorProtocol {
-//
-//    public var mainView: UIView?
-//    
-//    public var containerView: UIView?
-//    
-//    public var alertView: AlertViewProtocol?
-//    
-//    public var constraintModel: ConstraintModel?
-//    
-//    public var onClose: (() -> Void)?
-//    
-//    public var closeTappedAround: Bool = false
-//    
-//    public var blockUserInteractions: Bool = false
-//    
-//    public var closeableZoneRatio: CGFloat = 0.3
-//    
-//    public var touchBeganPosition: CGPoint?
-//    
-//    public var canMove: Bool = true
-//    
-//    public var animationTime: TimeInterval = 0.4
-//    
-//    private var isMoving: Bool = false
-//    private var isProcessing: Bool = false
-//    
-//    public init() {
-//        self.canMove = true
-//        self.animationTime = 0.4
-//    }
-//    
-//    public init(canMove: Bool = true, animationTime: TimeInterval = 0.4) {
-//        self.canMove = canMove
-//        self.animationTime = animationTime
-//    }
-//    
-//    public func setConstraints() {
-//        guard let mainView = self.mainView, let containerView = self.containerView, let alertView = self.alertView else { return }
-//        containerView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: constraintModel?.leadingConstraint ?? 0).isActive = true
-//        containerView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -1 * (constraintModel?.trailingCosntraint ?? 0)).isActive = true
-//        containerView.topAnchor.constraint(equalTo: mainView.topAnchor, constant: constraintModel?.topConstraint ?? 0).isActive = true
-//        containerView.backgroundColor = alertView.containerViewBackgroundColor
-//        
-//        containerView.addSubview(alertView)
-//        alertView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        
-//        containerView.heightAnchor.constraint(equalToConstant: alertView.size.height).isActive = true
-//        alertView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-//        alertView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-//        alertView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-//        alertView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-//        
-//        containerView.setNeedsLayout()
-//        containerView.setNeedsUpdateConstraints()
-//        
-//        mainView.layoutIfNeeded()
-//    }
-//    
-//    public func openingAnimate() {
-//        guard let customView = self.containerView else { return }
-//        customView.alpha = 0.0
-//            
-//        UIView.animate(withDuration: animationTime, animations: {
-//            customView.alpha = 1.0
+import Foundation
+import UIKit
+
+public class FadeInDecorator: AlertViewDecoratorProtocol {
+
+    public var mainView: UIView?
+    
+    public var containerView = UIView()
+    
+    public var shadowView: UIView?
+    
+    public var alertView: AlertViewProtocol?
+    
+    public var constraintModel: ConstraintModel?
+    
+    public var animationModel: AnimationModel?
+    
+    public var createDefaultAnimationModel: (() -> AnimationModel)? = {
+        let animationModel = AnimationModel()
+        animationModel.initialSpringVelocity = 1
+        animationModel.usingSpringWithDamping = 0.5
+        animationModel.options = .curveEaseInOut
+        return animationModel
+    }
+    
+    public var onClose: (() -> Void)?
+    
+    public var closeTappedAround: Bool = false
+    
+    public var blockUserInteractions: Bool = false
+    
+    public var closeableZoneRatio: CGFloat = 0.3
+    
+    public var touchBeganPosition: CGPoint?
+    
+    public var canMove: Bool = true
+    
+    public var shadowViewAlphaValue: CGFloat = 0.4
+    
+    private var isAnimating: Bool = true
+    
+    public init() {
+        self.constraintModel = ConstraintModel.Builder().build(type: .top)
+    }
+    
+    public init(type: ConstraintModel.Builder.BuildStyle) {
+        self.constraintModel = ConstraintModel.Builder().build(type: type)
+    }
+    
+    public init(constraints: ConstraintModel) {
+        self.constraintModel = constraints
+    }
+    
+    public func setConstraints() {
+        guard let constraints = self.constraintModel else { return }
+        
+        setConstraints(constraintModel: constraints, selector: #selector(tappedAround))
+    }
+    
+    @objc private func tappedAround() {
+        if !closeTappedAround { return }
+        closingAnimate()
+    }
+    
+    public func openingAnimate() {
+        self.containerView.alpha = 0
+//        UIView.animate(withDuration: getAnimationModel().animationTime,
+//                       delay: getAnimationModel().delay,
+//                       usingSpringWithDamping: getAnimationModel().usingSpringWithDamping,
+//                       initialSpringVelocity: getAnimationModel().initialSpringVelocity,
+//                       options: getAnimationModel().options, animations: {
+//                        self.containerView.alpha = 1.0
+//        }, completion: { isFinished in
+//            self.isAnimating = false
 //        })
-//    }
-//    
-//    public func closingAnimate() {
-//        guard let customView = self.containerView else { return }
-//        isProcessing = true
-//        UIView.animate(withDuration: animationTime, animations: {
-//            customView.alpha = 0.0
-//        }) { [weak self] (_) in
-//            self?.containerView = nil
-//            self?.onClose?()
-//        }
-//    }
-//    
-//    public func touchesBegan(touches: Set<UITouch>, event: UIEvent?) {
-//    }
-//    
-//    public func touchesMoved(touches: Set<UITouch>, event: UIEvent?) {
-//    }
-//    
-//    public func touchesEnd(touches: Set<UITouch>, event: UIEvent?) {
-//    }
-//}
+        
+        UIView.animate(withDuration: getAnimationModel().animationTime, animations: {
+            self.containerView.alpha = 1
+        }, completion: { isFinished in
+            self.isAnimating = false
+        })
+    }
+    
+    public func closingAnimate() {
+        if isAnimating { return }
+        UIView.animate(withDuration: getAnimationModel().animationTime, animations: {
+            self.containerView.alpha = 0
+        }, completion: { isFinished in
+            self.containerView.removeFromSuperview()
+            self.shadowView?.removeFromSuperview()
+        })
+    }
+}

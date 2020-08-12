@@ -39,6 +39,7 @@ extension ConstraintModel {
             case bottom = 1
             case left = 2
             case right = 3
+            case center = 4
         }
         
         private var leadingConstraint: CGFloat? = nil
@@ -107,6 +108,8 @@ extension ConstraintModel {
                 setConstraintsForRight()
             case .left:
                 setConstraintsForLeft()
+            case .center:
+                setConstraintsForCenter()
             }
             return build()
         }
@@ -133,6 +136,11 @@ extension ConstraintModel {
             leadingConstraint = 0
             topConstraint = 0
             bottomConstraint = 0
+        }
+        
+        private func setConstraintsForCenter() {
+            centerXConstraint = 0
+            centerYConstraint = 0
         }
     }
 }

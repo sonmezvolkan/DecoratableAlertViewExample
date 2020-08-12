@@ -20,6 +20,10 @@ public protocol AlertViewDecoratorProtocol: class {
     var alertView: AlertViewProtocol? { get set }
     
     var constraintModel: ConstraintModel? { get set }
+
+    var createDefaultAnimationModel: (() -> AnimationModel)? { get set }
+    
+    var animationModel: AnimationModel? { get set }
     
     var onClose: (() -> Void)? { get set }
     
@@ -28,8 +32,6 @@ public protocol AlertViewDecoratorProtocol: class {
     var blockUserInteractions: Bool { get set }
     
     var closeTappedAround: Bool { get set }
-    
-    var animationTime: TimeInterval { get set }
     
     var closeableZoneRatio: CGFloat { get set }
     
@@ -41,6 +43,25 @@ public protocol AlertViewDecoratorProtocol: class {
     
     func closingAnimate()
     
+}
+
+extension AlertViewDecoratorProtocol {
+    
+    public func getAnimationModel() -> AnimationModel {
+        if animationModel == nil {
+            animationModel = AnimationModel()
+        }
+        
+        return animationModel!
+    }
+    
+    public func createAnimationModelInstance() {
+        if let createDefaultAnimation = self.createDefaultAnimationModel {
+            self.animationModel = createDefaultAnimation()
+        } else {
+            self.animationModel = AnimationModel()
+        }
+    }
 }
 
 extension AlertViewDecoratorProtocol {

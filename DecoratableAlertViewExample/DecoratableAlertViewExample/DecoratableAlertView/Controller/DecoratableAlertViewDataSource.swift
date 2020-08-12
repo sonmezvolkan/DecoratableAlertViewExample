@@ -37,6 +37,8 @@ public class DecoratableAlertViewDataSource {
                     alertDecorator: AlertViewDecoratorProtocol) {
             self.alertDecorator = alertDecorator
             self.alertDecorator.alertView = alertView
+            
+            self.alertDecorator.createAnimationModelInstance()
         }
         
         @discardableResult
@@ -85,9 +87,34 @@ public class DecoratableAlertViewDataSource {
         
         @discardableResult
         public func setAnimationTime(animationTime: TimeInterval) -> Builder {
-            self.alertDecorator.animationTime = animationTime
+            self.alertDecorator.animationModel?.animationTime = animationTime
             return self
         }
+        
+        @discardableResult
+        public func setAnimationDelay(delay: TimeInterval) -> Builder {
+            self.alertDecorator.animationModel?.delay = delay
+            return self
+        }
+        
+        @discardableResult
+        public func setUsingSpringWithDamping(ratio: CGFloat) -> Builder {
+            self.alertDecorator.animationModel?.usingSpringWithDamping = ratio
+            return self
+        }
+        
+        @discardableResult
+        public func setInitialSpringVelocity(value: CGFloat) -> Builder {
+            self.alertDecorator.animationModel?.initialSpringVelocity = value
+            return self
+        }
+        
+        @discardableResult
+        public func setAnimationOptions(options: UIView.AnimationOptions) -> Builder {
+            self.alertDecorator.animationModel?.options = options
+            return self
+        }
+        
         
         @discardableResult
         public func setCanMove(canMove: Bool) -> Builder {
