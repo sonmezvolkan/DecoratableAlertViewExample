@@ -31,6 +31,8 @@
 		E75A066B24E058C9008A3DDC /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75A066A24E058C9008A3DDC /* MenuView.swift */; };
 		E75A066D24E058D1008A3DDC /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E75A066C24E058D1008A3DDC /* MenuView.xib */; };
 		E78570B724E45A2900676DDE /* AnimationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78570B624E45A2900676DDE /* AnimationModel.swift */; };
+		E7AC445324E5AB76001AFF03 /* DefaultAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AC445224E5AB76001AFF03 /* DefaultAlertView.swift */; };
+		E7AC445524E5AB84001AFF03 /* DefaultAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AC445424E5AB84001AFF03 /* DefaultAlertView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,8 @@
 		E75A066A24E058C9008A3DDC /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		E75A066C24E058D1008A3DDC /* MenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuView.xib; sourceTree = "<group>"; };
 		E78570B624E45A2900676DDE /* AnimationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModel.swift; sourceTree = "<group>"; };
+		E7AC445224E5AB76001AFF03 /* DefaultAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlertView.swift; sourceTree = "<group>"; };
+		E7AC445424E5AB84001AFF03 /* DefaultAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultAlertView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +237,7 @@
 		E704AE0524DB2125002CFC56 /* Concrete */ = {
 			isa = PBXGroup;
 			children = (
+				E7AC445124E5AB64001AFF03 /* DefaultAlertView */,
 				E75A066924E058B4008A3DDC /* MenuView */,
 				E704AE0624DB2130002CFC56 /* ErrorView */,
 			);
@@ -263,6 +268,15 @@
 				E75A066C24E058D1008A3DDC /* MenuView.xib */,
 			);
 			path = MenuView;
+			sourceTree = "<group>";
+		};
+		E7AC445124E5AB64001AFF03 /* DefaultAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				E7AC445224E5AB76001AFF03 /* DefaultAlertView.swift */,
+				E7AC445424E5AB84001AFF03 /* DefaultAlertView.xib */,
+			);
+			path = DefaultAlertView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,6 +342,7 @@
 				E75A066D24E058D1008A3DDC /* MenuView.xib in Resources */,
 				E704ADE924DB1C88002CFC56 /* Main.storyboard in Resources */,
 				E704AE0A24DB215F002CFC56 /* ErrorView.xib in Resources */,
+				E7AC445524E5AB84001AFF03 /* DefaultAlertView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +358,7 @@
 				E704ADFC24DB1E98002CFC56 /* TopSlideDecorator.swift in Sources */,
 				E704ADE624DB1C88002CFC56 /* ViewController.swift in Sources */,
 				E704ADFE24DB1ECA002CFC56 /* BottomSlideDecorator.swift in Sources */,
+				E7AC445324E5AB76001AFF03 /* DefaultAlertView.swift in Sources */,
 				3326802A24DD35B7005647BE /* UIViewController+Extension.swift in Sources */,
 				3326802224DBEECE005647BE /* ConstraintModel.swift in Sources */,
 				33921DA824E12E1700FCAD38 /* ScalingDecorator.swift in Sources */,

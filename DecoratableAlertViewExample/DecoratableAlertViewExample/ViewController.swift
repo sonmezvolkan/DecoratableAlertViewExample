@@ -25,27 +25,21 @@ class ViewController: UIViewController {
         let menuView = MenuView()
         
         let constraints = ConstraintModel.Builder()
-            .setTopConstraint(constant: 86)
-            .setCenterXConstraint(constant: 0)
-            .build()
+            .build(type: .center)
         
-        let customDecorator = CustomAnimateDecorator(constraints: constraints)
-        customDecorator.openingAnimation = {
-            customDecorator.containerView.transform = CGAffineTransform(translationX: -300, y: 0)
-            UIView.animate(withDuration: 0.5, animations: {
-                customDecorator.containerView.transform = .identity
-            })
+        let alertViewBuilder = DefaultAlertView.Builder(message: "Volkan mesaj denemesi bakalım ne olacak deneme metni ne olacak hayırdır inşallah ")
+            .setTitle(title: "Volkan Sümerya")
+            .setDirection(axis: .vertical)
+        
+        for index in 0...5 {
+            alertViewBuilder.addButton(button: generateButton())
         }
         
-        customDecorator.closingAnimation = {
-             UIView.animate(withDuration: 0.5, animations: {
-                 customDecorator.containerView.transform = CGAffineTransform(translationX: 400, y: 0)
-             }, completion: { isFinished in
-                customDecorator.removeViews()
-             })
-        }
+        let view = alertViewBuilder.build()
+
+        let decorator = FadeInDecorator(constraints: constraints)
         
-        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: customDecorator)
+        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: view, alertDecorator: decorator)
             .setAutoCloseTimeLimit(limit: 30)
             .setCanMove(canMove: true)
             .setAnimationTime(animationTime: 1.0)
@@ -58,9 +52,19 @@ class ViewController: UIViewController {
         showDecoratableAlertView(dataSource: dataSource)
         
     }
+    
     @IBAction func btnCounter(_ sender: Any) {
         countIndex += 1
         lblCount.text = String(countIndex)
+    }
+    
+    private func generateButton() -> UIButton {
+        let button = UIButton()
+        button.backgroundColor = .red
+        button.setTitle("Volkan", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        
+        return button
     }
 }
 
