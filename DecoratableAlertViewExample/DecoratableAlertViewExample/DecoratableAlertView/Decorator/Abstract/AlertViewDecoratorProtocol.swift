@@ -66,6 +66,14 @@ extension AlertViewDecoratorProtocol {
 
 extension AlertViewDecoratorProtocol {
     
+    public func removeViews() {
+        self.containerView.removeFromSuperview()
+        self.shadowView?.removeFromSuperview()
+    }
+}
+
+extension AlertViewDecoratorProtocol {
+    
     public func setConstraints(constraintModel: ConstraintModel, selector: Selector? = nil) {
         
         guard let mainView = self.mainView else { return }

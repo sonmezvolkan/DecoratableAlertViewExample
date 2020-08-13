@@ -1,16 +1,16 @@
 //
-//  FadeInDecorator.swift
+//  CustomAbimateDecorator.swift
 //  DecoratableAlertViewExample
 //
-//  Created by Volkan SÖNMEZ on 6.08.2020.
+//  Created by Volkan SÖNMEZ on 13.08.2020.
 //  Copyright © 2020 Volkan Sönmez. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-public class FadeInDecorator: AlertViewDecoratorProtocol {
-
+public class CustomAnimateDecorator: AlertViewDecoratorProtocol {
+    
     public var mainView: UIView?
     
     public var containerView = UIView()
@@ -47,14 +47,10 @@ public class FadeInDecorator: AlertViewDecoratorProtocol {
     
     private var isAnimating: Bool = true
     
-    public init() {
-        self.constraintModel = ConstraintModel.Builder().build(type: .top)
-    }
+    public var openingAnimation: (() -> Void)?
     
-    public init(type: ConstraintModel.Builder.BuildStyle) {
-        self.constraintModel = ConstraintModel.Builder().build(type: type)
-    }
-    
+    public var closingAnimation: (() -> Void)?
+
     public init(constraints: ConstraintModel) {
         self.constraintModel = constraints
     }
@@ -71,22 +67,35 @@ public class FadeInDecorator: AlertViewDecoratorProtocol {
     }
     
     public func openingAnimate() {
-        self.containerView.alpha = 0
+        if let openingAnimation = self.openingAnimation {
+            openingAnimation()
+            return
+        }
         
-        UIView.animate(withDuration: getAnimationModel().animationTime, animations: {
-            self.containerView.alpha = 1
+        self.containerView.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
+        
+        UIView.animate(withDuration: getAnimationModel().animationTime,
+                       delay: getAnimationModel().delay,
+                       usingSpringWithDamping: getAnimationModel().usingSpringWithDamping,
+                       initialSpringVelocity: getAnimationModel().initialSpringVelocity,
+                       options: getAnimationModel().options, animations: {
+            self.containerView.transform = .identity
         }, completion: { isFinished in
             self.isAnimating = false
         })
     }
     
     public func closingAnimate() {
+        if let closingAnimation = self.closingAnimation {
+            closingAnimation()
+            return
+        }
+        
         if isAnimating { return }
         UIView.animate(withDuration: getAnimationModel().animationTime, animations: {
-            self.containerView.alpha = 0
+            self.containerView.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
         }, completion: { isFinished in
-            self.containerView.removeFromSuperview()
-            self.shadowView?.removeFromSuperview()
+            self.removeViews()
         })
     }
 }

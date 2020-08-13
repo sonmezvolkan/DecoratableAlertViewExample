@@ -14,6 +14,7 @@
 		3326802A24DD35B7005647BE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802924DD35B7005647BE /* UIViewController+Extension.swift */; };
 		3326802D24DD3605005647BE /* DecoratableContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802C24DD3605005647BE /* DecoratableContext.swift */; };
 		3326803324DD737D005647BE /* DecoratableAlertViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326803224DD737D005647BE /* DecoratableAlertViewDataSource.swift */; };
+		333060EB24E5576400FF866A /* CustomAnimateDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333060EA24E5576400FF866A /* CustomAnimateDecorator.swift */; };
 		33921DA824E12E1700FCAD38 /* ScalingDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33921DA724E12E1700FCAD38 /* ScalingDecorator.swift */; };
 		E704ADE224DB1C88002CFC56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADE124DB1C88002CFC56 /* AppDelegate.swift */; };
 		E704ADE624DB1C88002CFC56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704ADE524DB1C88002CFC56 /* ViewController.swift */; };
@@ -40,6 +41,7 @@
 		3326802924DD35B7005647BE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		3326802C24DD3605005647BE /* DecoratableContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratableContext.swift; sourceTree = "<group>"; };
 		3326803224DD737D005647BE /* DecoratableAlertViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratableAlertViewDataSource.swift; sourceTree = "<group>"; };
+		333060EA24E5576400FF866A /* CustomAnimateDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimateDecorator.swift; sourceTree = "<group>"; };
 		33921DA724E12E1700FCAD38 /* ScalingDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalingDecorator.swift; sourceTree = "<group>"; };
 		E704ADDE24DB1C88002CFC56 /* DecoratableAlertViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DecoratableAlertViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E704ADE124DB1C88002CFC56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,11 +118,12 @@
 			path = FadeInDecorator;
 			sourceTree = "<group>";
 		};
-		33921DA524E12DDE00FCAD38 /* CustomableDecorator */ = {
+		33921DA524E12DDE00FCAD38 /* CustomAnimateDecorator */ = {
 			isa = PBXGroup;
 			children = (
+				333060EA24E5576400FF866A /* CustomAnimateDecorator.swift */,
 			);
-			path = CustomableDecorator;
+			path = CustomAnimateDecorator;
 			sourceTree = "<group>";
 		};
 		33921DA624E12DF800FCAD38 /* ScalingDecorator */ = {
@@ -192,7 +195,7 @@
 		E704ADFA24DB1E43002CFC56 /* Concrete */ = {
 			isa = PBXGroup;
 			children = (
-				33921DA524E12DDE00FCAD38 /* CustomableDecorator */,
+				33921DA524E12DDE00FCAD38 /* CustomAnimateDecorator */,
 				33921DA624E12DF800FCAD38 /* ScalingDecorator */,
 				33921DA324E12DC200FCAD38 /* SlideDecorator */,
 				33921DA424E12DD400FCAD38 /* FadeInDecorator */,
@@ -343,6 +346,7 @@
 				3326802A24DD35B7005647BE /* UIViewController+Extension.swift in Sources */,
 				3326802224DBEECE005647BE /* ConstraintModel.swift in Sources */,
 				33921DA824E12E1700FCAD38 /* ScalingDecorator.swift in Sources */,
+				333060EB24E5576400FF866A /* CustomAnimateDecorator.swift in Sources */,
 				E704AE1024DB24AF002CFC56 /* UIDevice+Extension.swift in Sources */,
 				3326802624DBEFB5005647BE /* RightSlideDecorator.swift in Sources */,
 				E78570B724E45A2900676DDE /* AnimationModel.swift in Sources */,

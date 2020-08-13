@@ -78,7 +78,6 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
         }, completion: { isFinished in
             self.containerView.removeFromSuperview()
             self.shadowView?.removeFromSuperview()
-            self.isInAnimating = false
         })
     }
     

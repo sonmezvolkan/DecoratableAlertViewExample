@@ -89,8 +89,7 @@ public class ScalingDecorator: AlertViewDecoratorProtocol {
         UIView.animate(withDuration: getAnimationModel().animationTime, animations: {
             self.containerView.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
         }, completion: { isFinished in
-            self.containerView.removeFromSuperview()
-            self.shadowView?.removeFromSuperview()
+            self.removeViews()
         })
     }
 }

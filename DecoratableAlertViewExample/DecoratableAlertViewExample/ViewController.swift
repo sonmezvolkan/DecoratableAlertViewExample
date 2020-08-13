@@ -29,7 +29,23 @@ class ViewController: UIViewController {
             .setCenterXConstraint(constant: 0)
             .build()
         
-        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: FadeInDecorator(constraints: constraints))
+        let customDecorator = CustomAnimateDecorator(constraints: constraints)
+        customDecorator.openingAnimation = {
+            customDecorator.containerView.transform = CGAffineTransform(translationX: -300, y: 0)
+            UIView.animate(withDuration: 0.5, animations: {
+                customDecorator.containerView.transform = .identity
+            })
+        }
+        
+        customDecorator.closingAnimation = {
+             UIView.animate(withDuration: 0.5, animations: {
+                 customDecorator.containerView.transform = CGAffineTransform(translationX: 400, y: 0)
+             }, completion: { isFinished in
+                customDecorator.removeViews()
+             })
+        }
+        
+        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: customDecorator)
             .setAutoCloseTimeLimit(limit: 30)
             .setCanMove(canMove: true)
             .setAnimationTime(animationTime: 1.0)
