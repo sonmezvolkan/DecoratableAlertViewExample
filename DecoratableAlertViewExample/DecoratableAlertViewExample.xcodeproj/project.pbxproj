@@ -33,6 +33,7 @@
 		E78570B724E45A2900676DDE /* AnimationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78570B624E45A2900676DDE /* AnimationModel.swift */; };
 		E7AC445324E5AB76001AFF03 /* DefaultAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AC445224E5AB76001AFF03 /* DefaultAlertView.swift */; };
 		E7AC445524E5AB84001AFF03 /* DefaultAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AC445424E5AB84001AFF03 /* DefaultAlertView.xib */; };
+		E7B9622D24E70690000D4ADD /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B9622C24E70690000D4ADD /* UIApplication+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		E78570B624E45A2900676DDE /* AnimationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModel.swift; sourceTree = "<group>"; };
 		E7AC445224E5AB76001AFF03 /* DefaultAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlertView.swift; sourceTree = "<group>"; };
 		E7AC445424E5AB84001AFF03 /* DefaultAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultAlertView.xib; sourceTree = "<group>"; };
+		E7B9622C24E70690000D4ADD /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				E704AE0F24DB24AF002CFC56 /* UIDevice+Extension.swift */,
+				E7B9622C24E70690000D4ADD /* UIApplication+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				E704AE1024DB24AF002CFC56 /* UIDevice+Extension.swift in Sources */,
 				3326802624DBEFB5005647BE /* RightSlideDecorator.swift in Sources */,
 				E78570B724E45A2900676DDE /* AnimationModel.swift in Sources */,
+				E7B9622D24E70690000D4ADD /* UIApplication+Extension.swift in Sources */,
 				E75A066B24E058C9008A3DDC /* MenuView.swift in Sources */,
 				3326802824DBF8C7005647BE /* FadeInDecorator.swift in Sources */,
 				3326802D24DD3605005647BE /* DecoratableContext.swift in Sources */,

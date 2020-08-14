@@ -27,20 +27,24 @@ class ViewController: UIViewController {
         let constraints = ConstraintModel.Builder()
             .build(type: .center)
         
-        let alertViewBuilder = DefaultAlertView.Builder(message: "Volkan mesaj denemesi bakalım ne olacak deneme metni ne olacak hayırdır inşallah ")
+        DefaultAlertView.Builder(message: "Volkan mesaj denemesi bakalım ne olacak deneme metni ne olacak hayırdır inşallah ")
             .setTitle(title: "Volkan Sümerya")
             .setDirection(axis: .vertical)
+            .setImage(imageName: "success")
+            .addButton(button: generateButton())
+            .addButton(button: generateButton())
+            .addButton(button: generateButton())
+            .setShadowViewAlphaValue(value: 0.4)
+            .setCloseTappedAround(isEnabled: true)
+            .show()
         
-        for index in 0...5 {
-            alertViewBuilder.addButton(button: generateButton())
-        }
-        
-        let view = alertViewBuilder.build()
+
+       
 
         let decorator = FadeInDecorator(constraints: constraints)
         
-        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: view, alertDecorator: decorator)
-            .setAutoCloseTimeLimit(limit: 30)
+        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: decorator)
+            .setDuration(duration: 30)
             .setCanMove(canMove: true)
             .setAnimationTime(animationTime: 1.0)
             .setBlockUserInteractions(isEnabled: true)
@@ -49,7 +53,7 @@ class ViewController: UIViewController {
             .setClosableZoneRatio(ratio: 0.7)
             .build()
         
-        showDecoratableAlertView(dataSource: dataSource)
+//        showDecoratableAlertView(dataSource: dataSource)
         
     }
     

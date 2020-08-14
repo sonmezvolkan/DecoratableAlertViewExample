@@ -63,7 +63,7 @@ internal class DecoratableContext {
     }
     
     @objc private func timerClick() {
-        if dataSource?.timerLimit == timerIndex {
+        if dataSource?.duration == timerIndex {
             reset()
             dataSource?.decorator.closingAnimate()
         }

@@ -13,16 +13,16 @@ public class DecoratableAlertViewDataSource {
     
     public let decorator: AlertViewDecoratorProtocol!
     public let autoClose: Bool!
-    public var timerLimit: Int!
+    public var duration: Int!
     public var superViewBackgroundColor: UIColor!
     
     fileprivate init(decorator: AlertViewDecoratorProtocol,
                      autoClose: Bool,
-                     timerLimit: Int,
+                     duration: Int,
                      superViewBackgroundColor: UIColor) {
         self.decorator = decorator
         self.autoClose = autoClose
-        self.timerLimit = timerLimit
+        self.duration = duration
         self.superViewBackgroundColor = superViewBackgroundColor
     }
 
@@ -30,7 +30,7 @@ public class DecoratableAlertViewDataSource {
         
         private var alertDecorator: AlertViewDecoratorProtocol
         private var autoClose: Bool = false
-        private var timerLimit: Int = 15
+        private var duration: Int = 15
         private var superViewBackgroundColor: UIColor = .clear
         
         public init(alertView: AlertViewProtocol,
@@ -42,15 +42,15 @@ public class DecoratableAlertViewDataSource {
         }
         
         @discardableResult
-        public func setAutoCloseDisabled() -> Builder {
-            self.autoClose = false
+        public func setAutoCloseEnabled(enabled: Bool) -> Builder {
+            self.autoClose = enabled
             return self
         }
         
         @discardableResult
-        public func setAutoCloseTimeLimit(limit: Int) -> Builder {
+        public func setDuration(duration: Int) -> Builder {
             self.autoClose = true
-            self.timerLimit = limit
+            self.duration = duration
             return self
         }
         
@@ -125,7 +125,7 @@ public class DecoratableAlertViewDataSource {
         public func build() -> DecoratableAlertViewDataSource {
             return DecoratableAlertViewDataSource(decorator: alertDecorator,
                                                   autoClose: autoClose,
-                                                  timerLimit: timerLimit,
+                                                  duration: duration,
                                                   superViewBackgroundColor: superViewBackgroundColor)
         }
     }

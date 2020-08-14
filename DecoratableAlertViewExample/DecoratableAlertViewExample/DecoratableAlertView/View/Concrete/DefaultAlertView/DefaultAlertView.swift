@@ -17,26 +17,30 @@ public class DefaultAlertView: UIView, AlertViewProtocol {
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblDescription: UILabel!
+    @IBOutlet weak var lblMessage: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var lblMessageTopConstraint: NSLayoutConstraint!
     
     private var title: String?
     private var message: String?
     private var buttons: [UIButton]?
     private var axis: NSLayoutConstraint.Axis = .horizontal
+    private var image: UIImage?
+    private var width: CGFloat = 0
     
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        setUp()
-    }
+    private var TOP_CONSTRAINT_WITH_IMAGE: CGFloat = 112
     
     fileprivate init(title: String?, message: String,
-                     buttons: [UIButton], axis: NSLayoutConstraint.Axis) {
+                     buttons: [UIButton], axis: NSLayoutConstraint.Axis,
+                     image: UIImage?, width: CGFloat) {
         super.init(frame: .zero)
         self.title = title
         self.message = message
         self.buttons = buttons
         self.axis = axis
+        self.image = image
+        self.width = width
         
         setUp()
     }
@@ -51,8 +55,7 @@ public class DefaultAlertView: UIView, AlertViewProtocol {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         contentView.backgroundColor = .red
         addSubview(contentView)
-        contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 72).isActive = true 
-        
+
         setContents()
     }
     
@@ -65,10 +68,28 @@ public class DefaultAlertView: UIView, AlertViewProtocol {
     }
     
     private func setContents() {
-        lblTitle.text = title
-        lblDescription.text = message
-        
+        setViewWidth()
+        setTopOfAlertView()
+        lblMessage.text = message
         addButtonsIfNeeded()
+    }
+    
+    private func setViewWidth() {
+        contentView.widthAnchor.constraint(equalToConstant: width).isActive = true
+    }
+    
+    private func setTopOfAlertView() {
+        let isImageExist = self.image != nil
+        
+        lblTitle.isHidden = isImageExist
+        imageView.isHidden = !isImageExist
+        
+        if isImageExist {
+            imageView.image = self.image
+            lblMessageTopConstraint.constant = TOP_CONSTRAINT_WITH_IMAGE
+        } else {
+            lblTitle.text = title
+        }
     }
     
     private func addButtonsIfNeeded() {
@@ -84,20 +105,32 @@ public class DefaultAlertView: UIView, AlertViewProtocol {
 
 extension DefaultAlertView {
     
+    public enum AlertViewType: Int {
+        case success
+        case failure
+        case warning
+    }
+    
     public class Builder {
         
+        private let bundle = Bundle.main
+        private let alertDecorator = FadeInDecorator()
+        
         private var title: String?
+        private var titleFont: UIFont?
         private var message: String
+        private var messageFont: UIFont?
         private var buttons: [UIButton] = []
         private var axis: NSLayoutConstraint.Axis = .horizontal
+        private var image: UIImage?
+        private var width = UIScreen.main.bounds.width - 72
+        
+        private var duration: Int = 0
+        private var autoClose: Bool = false
         
         public init(message: String) {
             self.message = message
-        }
-        
-        public init(title: String, message: String) {
-            self.title = title
-            self.message = message
+            self.alertDecorator.blockUserInteractions = true
         }
         
         @discardableResult
@@ -113,16 +146,111 @@ extension DefaultAlertView {
         }
         
         @discardableResult
+        public func setImage(imageName: String) -> Builder {
+            self.image = UIImage(named: imageName)
+            return self
+        }
+        
+        @discardableResult
         public func addButton(button: UIButton) -> Builder {
             self.buttons.append(button)
             return self
         }
         
-        public func build() -> DefaultAlertView {
+        @discardableResult
+        public func setAutoClose(enabled: Bool) -> Builder {
+            self.autoClose = enabled
+            return self
+        }
+        
+        @discardableResult
+        public func setDuration(duration: Int) -> Builder {
+            setAutoClose(enabled: true)
+            self.duration = duration
+            return self
+        }
+        
+        @discardableResult
+        public func setCloseTappedAround(isEnabled: Bool) -> Builder {
+            self.alertDecorator.closeTappedAround = isEnabled
+            return self
+        }
+        
+        @discardableResult
+        public func setShadowViewAlphaValue(value: CGFloat) -> Builder {
+            self.alertDecorator.shadowViewAlphaValue = value
+            return self
+        }
+        
+        @discardableResult
+        public func setAnimationTime(animationTime: TimeInterval) -> Builder {
+            self.alertDecorator.animationModel?.animationTime = animationTime
+            return self
+        }
+        
+        @discardableResult
+        public func setAnimationDelay(delay: TimeInterval) -> Builder {
+            self.alertDecorator.animationModel?.delay = delay
+            return self
+        }
+        
+        @discardableResult
+        public func setUsingSpringWithDamping(ratio: CGFloat) -> Builder {
+            self.alertDecorator.animationModel?.usingSpringWithDamping = ratio
+            return self
+        }
+        
+        @discardableResult
+        public func setInitialSpringVelocity(value: CGFloat) -> Builder {
+            self.alertDecorator.animationModel?.initialSpringVelocity = value
+            return self
+        }
+        
+        @discardableResult
+        public func setAnimationOptions(options: UIView.AnimationOptions) -> Builder {
+            self.alertDecorator.animationModel?.options = options
+            return self
+        }
+        
+        public func getAlertView() -> DefaultAlertView {
             return DefaultAlertView(title: title,
                                     message: message,
                                     buttons: buttons,
-                                    axis: axis)
+                                    axis: axis,
+                                    image: image,
+                                    width: width)
         }
+    
+        
+        public func show(alertViewType: AlertViewType) {
+            setImage(alertViewType: alertViewType)
+            
+            show()
+        }
+        
+        private func setImage(alertViewType: AlertViewType) {
+            switch alertViewType {
+            case .success:
+                image = UIImage(named: "success", in: bundle, compatibleWith: nil)
+            case .failure:
+                image = UIImage(named: "failure", in: bundle, compatibleWith: nil)
+            case .warning:
+                image = UIImage(named: "warning", in: bundle, compatibleWith: nil)
+            }
+        }
+        
+        public func show() {
+            guard let controller = UIApplication.getTopMostViewController() else { return }
+         
+            alertDecorator.constraintModel = ConstraintModel.Builder().build(type: .center)
+            
+            let dataSource = DecoratableAlertViewDataSource.Builder(alertView: getAlertView(), alertDecorator: alertDecorator)
+                .setAutoCloseEnabled(enabled: autoClose)
+                .build()
+            
+            controller.showDecoratableAlertView(dataSource: dataSource)
+            
+        }
+     
     }
 }

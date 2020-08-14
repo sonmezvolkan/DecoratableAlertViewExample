@@ -11,7 +11,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DefaultAlertView" customModule="DecoratableAlertViewExample" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="v43-4K-WXS"/>
-                <outlet property="lblDescription" destination="zWp-6L-n1I" id="nX1-lg-5GW"/>
+                <outlet property="imageView" destination="DXe-3G-EMJ" id="b2L-Tk-xO5"/>
+                <outlet property="lblMessage" destination="zWp-6L-n1I" id="Uqj-jq-EKz"/>
+                <outlet property="lblMessageTopConstraint" destination="beX-N7-mrr" id="8nK-6f-ONj"/>
                 <outlet property="lblTitle" destination="iv1-kf-0La" id="ZxZ-6d-LGc"/>
                 <outlet property="stackView" destination="9vg-kp-s0J" id="aNb-le-Ela"/>
             </connections>
@@ -24,8 +26,15 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4lH-JZ-E6B">
                     <rect key="frame" x="0.0" y="0.0" width="422" height="221"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iv1-kf-0La">
-                            <rect key="frame" x="24" y="32" width="374" height="20.333333333333329"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="success" translatesAutoresizingMaskIntoConstraints="NO" id="DXe-3G-EMJ">
+                            <rect key="frame" x="179" y="24" width="64" height="64"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="64" id="FAd-pQ-9Iy"/>
+                                <constraint firstAttribute="height" constant="64" id="XoR-FI-3bc"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iv1-kf-0La">
+                            <rect key="frame" x="24" y="32" width="374" height="21"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -46,7 +55,9 @@
                         <constraint firstAttribute="trailing" secondItem="iv1-kf-0La" secondAttribute="trailing" constant="24" id="6Oq-ya-9co"/>
                         <constraint firstItem="iv1-kf-0La" firstAttribute="leading" secondItem="4lH-JZ-E6B" secondAttribute="leading" constant="24" id="I8f-rH-eRZ"/>
                         <constraint firstAttribute="bottom" secondItem="9vg-kp-s0J" secondAttribute="bottom" constant="24" id="RDs-e3-cZy"/>
-                        <constraint firstItem="zWp-6L-n1I" firstAttribute="top" secondItem="iv1-kf-0La" secondAttribute="bottom" constant="45.666666666666671" id="Xmz-ro-jSo"/>
+                        <constraint firstItem="DXe-3G-EMJ" firstAttribute="centerX" secondItem="4lH-JZ-E6B" secondAttribute="centerX" id="SFx-uv-Tiw"/>
+                        <constraint firstItem="zWp-6L-n1I" firstAttribute="top" secondItem="4lH-JZ-E6B" secondAttribute="top" constant="98" id="beX-N7-mrr"/>
+                        <constraint firstItem="DXe-3G-EMJ" firstAttribute="top" secondItem="4lH-JZ-E6B" secondAttribute="top" constant="24" id="f6l-1V-xng"/>
                         <constraint firstItem="9vg-kp-s0J" firstAttribute="top" secondItem="zWp-6L-n1I" secondAttribute="bottom" constant="32" id="lIz-mu-2Ri"/>
                         <constraint firstItem="iv1-kf-0La" firstAttribute="top" secondItem="4lH-JZ-E6B" secondAttribute="top" constant="32" id="lhp-WD-Qp0"/>
                         <constraint firstItem="zWp-6L-n1I" firstAttribute="trailing" secondItem="iv1-kf-0La" secondAttribute="trailing" id="mGj-Rf-JSp"/>
@@ -67,4 +78,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="-107.20108695652175"/>
         </view>
     </objects>
+    <resources>
+        <image name="success" width="72" height="72"/>
+    </resources>
 </document>
