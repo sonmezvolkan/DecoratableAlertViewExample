@@ -25,35 +25,33 @@ class ViewController: UIViewController {
         let menuView = MenuView()
         
         let constraints = ConstraintModel.Builder()
-            .build(type: .center)
+            .build(type: .top)
         
-        DefaultAlertView.Builder(message: "Volkan mesaj denemesi bakalım ne olacak deneme metni ne olacak hayırdır inşallah ")
-            .setTitle(title: "Volkan Sümerya")
-            .setDirection(axis: .vertical)
-            .setImage(imageName: "success")
-            .addButton(button: generateButton())
-            .addButton(button: generateButton())
-            .addButton(button: generateButton())
-            .setShadowViewAlphaValue(value: 0.4)
-            .setCloseTappedAround(isEnabled: true)
-            .show()
+//        DefaultAlertView.Builder(message: "Volkan mesaj denemesi bakalım ne olacak deneme metni ne olacak hayırdır inşallah ")
+//            .setTitle(title: "Volkan Sümerya")
+//            .setDirection(axis: .horizontal)
+//            //.setImage(imageName: "success")
+//            .addButton(dataSource: generateButton())
+//            .addButton(dataSource: generateButton2())
+//            .addButton(dataSource: generateButton3())
+//            .setCloseButtonVisibility(visible: true)
+//            .setCloseTappedAround(isEnabled: false)
+//            .show()
         
 
        
 
-        let decorator = FadeInDecorator(constraints: constraints)
+        let decorator = TopSlideDecorator()
         
-        let dataSource = DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: decorator)
+        DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: decorator)
             .setDuration(duration: 30)
             .setCanMove(canMove: true)
-            .setAnimationTime(animationTime: 1.0)
+            .setAnimationTime(animationTime: 0.4)
             .setBlockUserInteractions(isEnabled: true)
             .setCloseTappedAround(isEnabled: true)
             .setShadowViewAlphaValue(value: 0)
             .setClosableZoneRatio(ratio: 0.7)
-            .build()
-        
-//        showDecoratableAlertView(dataSource: dataSource)
+            .show()
         
     }
     
@@ -62,13 +60,28 @@ class ViewController: UIViewController {
         lblCount.text = String(countIndex)
     }
     
-    private func generateButton() -> UIButton {
-        let button = UIButton()
-        button.backgroundColor = .red
-        button.setTitle("Volkan", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        
-        return button
+    private func generateButton() -> TemplateButtonDataSource {
+        let source = TemplateButtonDataSource.Builder(title: "Volkan", onDidTap: { [weak self] in
+            print("tıklandı")
+        })
+    
+        return source.build()
+    }
+    
+    private func generateButton2() -> TemplateButtonDataSource {
+        let source = TemplateButtonDataSource.Builder(title: "Volkan", onDidTap: { [weak self] in
+            print("tıklandı 2")
+        })
+    
+        return source.build()
+    }
+    
+    private func generateButton3() -> TemplateButtonDataSource {
+        let source = TemplateButtonDataSource.Builder(title: "Volkan", onDidTap: { [weak self] in
+            print("tıklandı 3")
+        })
+    
+        return source.build()
     }
 }
 

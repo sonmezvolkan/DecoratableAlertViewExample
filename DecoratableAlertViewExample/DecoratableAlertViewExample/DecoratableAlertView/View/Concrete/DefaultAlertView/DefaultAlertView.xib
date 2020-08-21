@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DefaultAlertView" customModule="DecoratableAlertViewExample" customModuleProvider="target">
             <connections>
+                <outlet property="bottomConstraint" destination="RDs-e3-cZy" id="GGa-8Z-GAU"/>
+                <outlet property="btnClose" destination="gsh-rh-j6B" id="CNJ-LH-HCR"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="v43-4K-WXS"/>
                 <outlet property="imageView" destination="DXe-3G-EMJ" id="b2L-Tk-xO5"/>
                 <outlet property="lblMessage" destination="zWp-6L-n1I" id="Uqj-jq-EKz"/>
@@ -40,23 +42,38 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zWp-6L-n1I">
-                            <rect key="frame" x="24" y="98" width="374" height="19.333333333333329"/>
+                            <rect key="frame" x="24" y="72" width="374" height="19.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="9vg-kp-s0J">
-                            <rect key="frame" x="24" y="149.33333333333334" width="374" height="47.666666666666657"/>
+                            <rect key="frame" x="24" y="123.33333333333331" width="374" height="73.666666666666686"/>
                         </stackView>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsh-rh-j6B">
+                            <rect key="frame" x="370" y="16" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="36" id="YRe-yx-wzu"/>
+                                <constraint firstAttribute="height" constant="36" id="aCw-1F-2xc"/>
+                            </constraints>
+                            <state key="normal" image="close">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="btnCloseTapped:" destination="-1" eventType="touchUpInside" id="Ghk-fN-QhB"/>
+                            </connections>
+                        </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="zWp-6L-n1I" firstAttribute="leading" secondItem="iv1-kf-0La" secondAttribute="leading" id="3fS-T4-GKr"/>
                         <constraint firstAttribute="trailing" secondItem="iv1-kf-0La" secondAttribute="trailing" constant="24" id="6Oq-ya-9co"/>
+                        <constraint firstItem="gsh-rh-j6B" firstAttribute="top" secondItem="4lH-JZ-E6B" secondAttribute="top" constant="16" id="8gY-Jf-kmM"/>
+                        <constraint firstAttribute="trailing" secondItem="gsh-rh-j6B" secondAttribute="trailing" constant="16" id="9MP-z1-fpF"/>
                         <constraint firstItem="iv1-kf-0La" firstAttribute="leading" secondItem="4lH-JZ-E6B" secondAttribute="leading" constant="24" id="I8f-rH-eRZ"/>
                         <constraint firstAttribute="bottom" secondItem="9vg-kp-s0J" secondAttribute="bottom" constant="24" id="RDs-e3-cZy"/>
                         <constraint firstItem="DXe-3G-EMJ" firstAttribute="centerX" secondItem="4lH-JZ-E6B" secondAttribute="centerX" id="SFx-uv-Tiw"/>
-                        <constraint firstItem="zWp-6L-n1I" firstAttribute="top" secondItem="4lH-JZ-E6B" secondAttribute="top" constant="98" id="beX-N7-mrr"/>
+                        <constraint firstItem="zWp-6L-n1I" firstAttribute="top" secondItem="4lH-JZ-E6B" secondAttribute="top" constant="72" id="beX-N7-mrr"/>
                         <constraint firstItem="DXe-3G-EMJ" firstAttribute="top" secondItem="4lH-JZ-E6B" secondAttribute="top" constant="24" id="f6l-1V-xng"/>
                         <constraint firstItem="9vg-kp-s0J" firstAttribute="top" secondItem="zWp-6L-n1I" secondAttribute="bottom" constant="32" id="lIz-mu-2Ri"/>
                         <constraint firstItem="iv1-kf-0La" firstAttribute="top" secondItem="4lH-JZ-E6B" secondAttribute="top" constant="32" id="lhp-WD-Qp0"/>
@@ -79,6 +96,7 @@
         </view>
     </objects>
     <resources>
+        <image name="close" width="32" height="32"/>
         <image name="success" width="72" height="72"/>
     </resources>
 </document>

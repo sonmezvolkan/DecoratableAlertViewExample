@@ -122,11 +122,17 @@ public class DecoratableAlertViewDataSource {
             return self
         }
 
-        public func build() -> DecoratableAlertViewDataSource {
+        public func getDataSource() -> DecoratableAlertViewDataSource {
             return DecoratableAlertViewDataSource(decorator: alertDecorator,
                                                   autoClose: autoClose,
                                                   duration: duration,
                                                   superViewBackgroundColor: superViewBackgroundColor)
+        }
+        
+        public func show() {
+            guard let controller = UIApplication.getTopMostViewController() else { return }
+            
+            controller.showDecoratableAlertView(dataSource: getDataSource())
         }
     }
 }
