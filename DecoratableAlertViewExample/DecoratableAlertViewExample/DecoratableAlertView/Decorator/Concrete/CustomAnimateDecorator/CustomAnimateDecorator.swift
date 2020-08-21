@@ -50,6 +50,10 @@ public class CustomAnimateDecorator: AlertViewDecoratorProtocol {
     public var openingAnimation: (() -> Void)?
     
     public var closingAnimation: (() -> Void)?
+    
+    public init(type: ConstraintModel.Builder.BuildStyle = .center) {
+        self.constraintModel = ConstraintModel.Builder().build(type: type)
+    }
 
     public init(constraints: ConstraintModel) {
         self.constraintModel = constraints

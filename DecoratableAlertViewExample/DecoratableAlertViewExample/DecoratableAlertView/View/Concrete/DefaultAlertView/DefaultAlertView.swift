@@ -114,7 +114,7 @@ extension DefaultAlertView {
     public class Builder {
         
         private let bundle = Bundle.main
-        private let alertDecorator = FadeInDecorator()
+        private let alertDecorator = CustomAnimateDecorator(type: .center)
         
         private var title: String?
         private var titleFont: UIFont?
@@ -131,6 +131,37 @@ extension DefaultAlertView {
         public init(message: String) {
             self.message = message
             self.alertDecorator.blockUserInteractions = true
+            
+            setDecoratorAnimation()
+        }
+        
+        private func setDecoratorAnimation() {
+            alertDecorator.openingAnimation = {
+                self.openingAnimation()
+            }
+            
+            alertDecorator.closingAnimation = {
+                self.closingAnimation()
+            }
+        }
+        
+        private func openingAnimation() {
+            alertDecorator.containerView.transform = CGAffineTransform(translationX: 0, y: -600)
+            alertDecorator.shadowView?.alpha = 0
+            
+            UIView.animate(withDuration: alertDecorator.getAnimationModel().animationTime, animations: {
+                self.alertDecorator.containerView.transform = .identity
+                self.alertDecorator.shadowView?.alpha = self.alertDecorator.shadowViewAlphaValue
+            })
+        }
+        
+        private func closingAnimation() {
+            UIView.animate(withDuration: alertDecorator.getAnimationModel().animationTime, animations: {
+                self.alertDecorator.containerView.transform = CGAffineTransform(translationX: 0, y: 600)
+                self.alertDecorator.shadowView?.alpha = 0
+            }, completion: { isFinished in
+                self.alertDecorator.removeViews()
+            })
         }
         
         @discardableResult
