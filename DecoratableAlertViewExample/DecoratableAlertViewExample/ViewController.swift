@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     @IBAction func btnShow(_ sender: Any) {
         let errorView = ErrorView()
-        errorView.setErrorMessage(text: "Volkan\nVolkan\nDeneme\nDeneme 2\nVa\na\nafa\nasda\nfsdf\n")
+        errorView.setErrorMessage(text: "Volkan Volkan Deneme\nDeneme 2\nVa\na\nafa\nasda\nfsdf\n")
         
         let menuView = MenuView()
         
