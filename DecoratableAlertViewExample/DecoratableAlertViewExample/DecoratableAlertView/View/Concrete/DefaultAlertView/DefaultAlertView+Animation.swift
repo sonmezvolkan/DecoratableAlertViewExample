@@ -15,7 +15,14 @@ extension DefaultAlertView.Builder {
         setOpeningTransform()
         alertDecorator.shadowView?.alpha = 0
         
-        UIView.animate(withDuration: alertDecorator.getAnimationModel().animationTime, animations: {
+        let animation = alertDecorator.getAnimationModel()
+
+        UIView.animate(withDuration: animation.animationTime,
+                       delay: animation.delay,
+                       usingSpringWithDamping: animation.usingSpringWithDamping,
+                       initialSpringVelocity: animation.initialSpringVelocity,
+                       options: animation.options,
+                       animations: {
             self.alertDecorator.containerView.transform = .identity
             self.alertDecorator.shadowView?.alpha = self.alertDecorator.shadowViewAlphaValue
             if self.openingAnimateType == .fadeIn || self.fadeInEnabled {

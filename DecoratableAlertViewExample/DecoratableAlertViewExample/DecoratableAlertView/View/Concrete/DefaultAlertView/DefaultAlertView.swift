@@ -257,25 +257,25 @@ extension DefaultAlertView {
         
         @discardableResult
         public func setAnimationTime(animationTime: TimeInterval) -> Builder {
-            self.alertDecorator.animationModel?.animationTime = animationTime
+            self.alertDecorator.getAnimationModel().animationTime = animationTime
             return self
         }
         
         @discardableResult
         public func setAnimationDelay(delay: TimeInterval) -> Builder {
-            self.alertDecorator.animationModel?.delay = delay
+            self.alertDecorator.getAnimationModel().delay = delay
             return self
         }
         
         @discardableResult
         public func setUsingSpringWithDamping(ratio: CGFloat) -> Builder {
-            self.alertDecorator.animationModel?.usingSpringWithDamping = ratio
+            self.alertDecorator.getAnimationModel().usingSpringWithDamping = ratio
             return self
         }
         
         @discardableResult
         public func setInitialSpringVelocity(value: CGFloat) -> Builder {
-            self.alertDecorator.animationModel?.initialSpringVelocity = value
+            self.alertDecorator.getAnimationModel().initialSpringVelocity = value
             return self
         }
         
@@ -299,7 +299,7 @@ extension DefaultAlertView {
         
         @discardableResult
         public func setAnimationOptions(options: UIView.AnimationOptions) -> Builder {
-            self.alertDecorator.animationModel?.options = options
+            self.alertDecorator.getAnimationModel().options = options
             return self
         }
         
@@ -344,7 +344,7 @@ extension DefaultAlertView {
         public func show() {
             alertDecorator.constraintModel = ConstraintModel.Builder().build(type: .center)
             
-            DecoratableAlertViewDataSource.Builder(alertView: getAlertView(), alertDecorator: alertDecorator)
+            DecoratableAlertViewDataSource.Builder(alertView: getAlertView(), alertDecorator: alertDecorator, withDefaultAnimationInstance: false)
                 .setAutoCloseEnabled(enabled: autoClose)
                 .show()
         }

@@ -26,32 +26,36 @@ class ViewController: UIViewController {
         
         let constraints = ConstraintModel.Builder()
             .build(type: .top)
+    
         
-//        DefaultAlertView.Builder(message: "Volkan mesaj denemesi bakalım ne olacak deneme metni ne olacak hayırdır inşallah ")
-//            .setTitle(title: "Volkan Sümerya")
-//            .setDirection(axis: .horizontal)
-//            //.setImage(imageName: "success")
-//            .addButton(dataSource: generateButton())
-//            .addButton(dataSource: generateButton2())
-//            .addButton(dataSource: generateButton3())
-//            .setCloseButtonVisibility(visible: true)
-//            .setCloseTappedAround(isEnabled: false)
-//            .show()
+        DefaultAlertView.Builder(message: "Volkan mesaj denemesi bakalım ne olacak deneme metni ne olacak hayırdır inşallah ")
+            .setTitle(title: "Volkan Sümerya")
+            .setDirection(axis: .horizontal)
+            //.setImage(imageName: "success")
+            .addButton(dataSource: generateButton())
+            .addButton(dataSource: generateButton2())
+            .addButton(dataSource: generateButton3())
+            .setCloseButtonVisibility(visible: true)
+            .setCloseTappedAround(isEnabled: false)
+            .setUsingSpringWithDamping(ratio: 0.8)
+            .setInitialSpringVelocity(value: 0.5)
+            .setAnimationOptions(options: .curveEaseInOut)
+            .show()
         
 
        
 
-        let decorator = TopSlideDecorator()
-        
-        DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: decorator)
-            .setDuration(duration: 30)
-            .setCanMove(canMove: true)
-            .setAnimationTime(animationTime: 0.4)
-            .setBlockUserInteractions(isEnabled: true)
-            .setCloseTappedAround(isEnabled: true)
-            .setShadowViewAlphaValue(value: 0)
-            .setClosableZoneRatio(ratio: 0.7)
-            .show()
+//        let decorator = TopSlideDecorator()
+//
+//        DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: decorator)
+//            .setDuration(duration: 30)
+//            .setCanMove(canMove: true)
+//            .setAnimationTime(animationTime: 0.4)
+//            .setBlockUserInteractions(isEnabled: true)
+//            .setCloseTappedAround(isEnabled: true)
+//            .setShadowViewAlphaValue(value: 0)
+//            .setClosableZoneRatio(ratio: 0.7)
+//            .show()
         
     }
     

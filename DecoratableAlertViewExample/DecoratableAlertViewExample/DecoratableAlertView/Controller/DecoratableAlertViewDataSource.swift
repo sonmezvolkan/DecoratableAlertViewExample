@@ -41,6 +41,17 @@ public class DecoratableAlertViewDataSource {
             self.alertDecorator.createAnimationModelInstance()
         }
         
+        internal init(alertView: AlertViewProtocol,
+                    alertDecorator: AlertViewDecoratorProtocol,
+                    withDefaultAnimationInstance: Bool) {
+            self.alertDecorator = alertDecorator
+            self.alertDecorator.alertView = alertView
+            
+            if withDefaultAnimationInstance {
+                self.alertDecorator.createAnimationModelInstance()
+            }
+        }
+        
         @discardableResult
         public func setAutoCloseEnabled(enabled: Bool) -> Builder {
             self.autoClose = enabled
