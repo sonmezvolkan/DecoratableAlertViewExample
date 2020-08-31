@@ -15,6 +15,7 @@
 		3326802D24DD3605005647BE /* DecoratableContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802C24DD3605005647BE /* DecoratableContext.swift */; };
 		3326803324DD737D005647BE /* DecoratableAlertViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326803224DD737D005647BE /* DecoratableAlertViewDataSource.swift */; };
 		333060EB24E5576400FF866A /* CustomAnimateDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333060EA24E5576400FF866A /* CustomAnimateDecorator.swift */; };
+		33764DD724F0E313000367B8 /* MockDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33764DD624F0E313000367B8 /* MockDataProvider.swift */; };
 		33921DA824E12E1700FCAD38 /* ScalingDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33921DA724E12E1700FCAD38 /* ScalingDecorator.swift */; };
 		33E92F3F24EFAC5300413091 /* DefaultAlertView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E92F3E24EFAC5300413091 /* DefaultAlertView+Animation.swift */; };
 		33E92F4124EFB0A900413091 /* DefaultAlertViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E92F4024EFB0A900413091 /* DefaultAlertViewDataSource.swift */; };
@@ -53,6 +54,7 @@
 		3326802C24DD3605005647BE /* DecoratableContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratableContext.swift; sourceTree = "<group>"; };
 		3326803224DD737D005647BE /* DecoratableAlertViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoratableAlertViewDataSource.swift; sourceTree = "<group>"; };
 		333060EA24E5576400FF866A /* CustomAnimateDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimateDecorator.swift; sourceTree = "<group>"; };
+		33764DD624F0E313000367B8 /* MockDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataProvider.swift; sourceTree = "<group>"; };
 		33921DA724E12E1700FCAD38 /* ScalingDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalingDecorator.swift; sourceTree = "<group>"; };
 		33E92F3E24EFAC5300413091 /* DefaultAlertView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DefaultAlertView+Animation.swift"; sourceTree = "<group>"; };
 		33E92F4024EFB0A900413091 /* DefaultAlertViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlertViewDataSource.swift; sourceTree = "<group>"; };
@@ -119,6 +121,14 @@
 				3326803224DD737D005647BE /* DecoratableAlertViewDataSource.swift */,
 			);
 			name = DataSource;
+			sourceTree = "<group>";
+		};
+		33764DD524F0E2F7000367B8 /* MockDataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				33764DD624F0E313000367B8 /* MockDataProvider.swift */,
+			);
+			path = MockDataProvider;
 			sourceTree = "<group>";
 		};
 		33921DA324E12DC200FCAD38 /* SlideDecorator */ = {
@@ -201,6 +211,7 @@
 		E704ADE024DB1C88002CFC56 /* DecoratableAlertViewExample */ = {
 			isa = PBXGroup;
 			children = (
+				33764DD524F0E2F7000367B8 /* MockDataProvider */,
 				33E92F5024F0092600413091 /* Model */,
 				E704AE0D24DB2499002CFC56 /* Extension */,
 				E704ADF524DB1DC1002CFC56 /* DecoratableAlertView */,
@@ -421,6 +432,7 @@
 				33E92F3F24EFAC5300413091 /* DefaultAlertView+Animation.swift in Sources */,
 				E704AE1024DB24AF002CFC56 /* UIDevice+Extension.swift in Sources */,
 				3326802624DBEFB5005647BE /* RightSlideDecorator.swift in Sources */,
+				33764DD724F0E313000367B8 /* MockDataProvider.swift in Sources */,
 				33E92F4F24F008E000413091 /* TestViewController.swift in Sources */,
 				E78570B724E45A2900676DDE /* AnimationModel.swift in Sources */,
 				E7B9622D24E70690000D4ADD /* UIApplication+Extension.swift in Sources */,

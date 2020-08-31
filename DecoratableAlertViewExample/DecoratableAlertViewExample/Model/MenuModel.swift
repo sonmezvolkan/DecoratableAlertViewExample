@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct MenuModel: Equatable {
+public class MenuModel: Equatable {
     
     public static func == (lhs: MenuModel, rhs: MenuModel) -> Bool {
         return lhs.title == rhs.title
