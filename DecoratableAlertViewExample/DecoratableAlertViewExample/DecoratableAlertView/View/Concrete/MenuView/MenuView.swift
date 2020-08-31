@@ -15,6 +15,8 @@ public class MenuView: UIView, AlertViewProtocol {
     
     public var containerViewBackgroundColor: UIColor?
     
+    public var containerViewAlphaValue: CGFloat?
+    
     @IBOutlet var contentView: UIView!
     
     public override init(frame: CGRect) {

@@ -121,6 +121,7 @@ extension AlertViewDecoratorProtocol {
         guard let mainView = self.mainView, let alertView = self.alertView else { return }
         
         containerView.backgroundColor = alertView.containerViewBackgroundColor
+        containerView.alpha = alertView.containerViewAlphaValue == nil ? 1.0 : alertView.containerViewAlphaValue!
         containerView.addSubview(alertView)
         alertView.translatesAutoresizingMaskIntoConstraints = false
         

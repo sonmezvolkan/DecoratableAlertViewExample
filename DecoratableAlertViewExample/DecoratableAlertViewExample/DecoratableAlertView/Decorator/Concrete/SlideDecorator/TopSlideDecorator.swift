@@ -44,16 +44,26 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     private var topConstraint: NSLayoutConstraint?
     
     public init() {
-    }
-    
-    public func setConstraints() {
-        let constraints = ConstraintModel.Builder()
+        self.constraintModel = ConstraintModel.Builder()
             .setLeadingConstraint(constant: 0)
             .setTrailingCosntraint(constant: 0)
             .setTopConstraint(constant: 0)
             .build()
+    }
         
-        setConstraints(constraintModel: constraints, selector: #selector(tappedAround))
+    public init(useDefaultConstraints: Bool, constraintModel: ConstraintModel? = nil) {
+        self.constraintModel = constraintModel
+        if useDefaultConstraints {
+            self.constraintModel = ConstraintModel.Builder()
+                .setTopConstraint(constant: UIDevice.current.getTopConstant())
+                .setLeadingConstraint(constant: 36)
+                .setTrailingCosntraint(constant: 36)
+                .build()
+        }
+    }
+    
+    public func setConstraints() {
+        setConstraints(constraintModel: constraintModel!, selector: #selector(tappedAround))
         addPanGestureRecognizerIfNeeded()
     }
     

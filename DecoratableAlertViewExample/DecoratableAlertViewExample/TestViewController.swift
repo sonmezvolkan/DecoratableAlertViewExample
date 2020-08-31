@@ -174,7 +174,7 @@ extension TestViewController: UITableViewDelegate, UITableViewDataSource {
             self.selectedMenus = rows
             self.parents.removeLast()
             tableView.beginUpdates()
-            tableView.deleteRows(at: deletedPath, with: .none)
+            tableView.deleteRows(at: deletedPath, with: .right)
             tableView.insertRows(at: insertedPath, with: .left)
             tableView.endUpdates()
         }
@@ -212,7 +212,7 @@ extension TestViewController: UITableViewDelegate, UITableViewDataSource {
             
             self.selectedMenus = rows
             tableView.beginUpdates()
-            tableView.deleteRows(at: path, with: .none)
+            tableView.deleteRows(at: path, with: .left)
             tableView.insertRows(at: insertPath, with: .right)
             tableView.endUpdates()
         }
