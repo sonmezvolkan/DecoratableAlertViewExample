@@ -15,6 +15,8 @@ public class ErrorView: UIView, AlertViewProtocol {
     
     public var containerViewBackgroundColor: UIColor? = UIColor(red: 251, green: 51, blue: 51)
     
+    public var containerViewAlphaValue: CGFloat?
+    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var lbl: UILabel!
     

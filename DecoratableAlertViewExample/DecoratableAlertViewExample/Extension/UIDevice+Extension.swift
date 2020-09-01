@@ -19,4 +19,8 @@ extension UIDevice {
             return false
         }
     }
+    
+    func getTopConstant(for value: CGFloat = 36) -> CGFloat {
+        return hasNotch ? value + 20 : value
+    }
 }

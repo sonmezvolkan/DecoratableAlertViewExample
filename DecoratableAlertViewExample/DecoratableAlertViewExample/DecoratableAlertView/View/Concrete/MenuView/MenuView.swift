@@ -15,6 +15,8 @@ public class MenuView: UIView, AlertViewProtocol {
     
     public var containerViewBackgroundColor: UIColor? = UIColor(rgb: 0x2A2A2A)
     
+    public var containerViewAlphaValue: CGFloat?
+    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var tableView: UITableView!
     

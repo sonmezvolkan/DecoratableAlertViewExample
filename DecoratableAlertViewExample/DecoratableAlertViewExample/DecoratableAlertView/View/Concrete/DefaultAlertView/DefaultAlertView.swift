@@ -15,6 +15,8 @@ public class DefaultAlertView: UIView, AlertViewProtocol {
     
     public var containerViewBackgroundColor: UIColor?
     
+    public var containerViewAlphaValue: CGFloat?
+    
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var lblTitle: UILabel!

@@ -13,7 +13,9 @@ public class NotificationView: UIView, AlertViewProtocol {
     
     public var onClose: (() -> Void)?
     
-    public var containerViewBackgroundColor: UIColor? = .black
+    public var containerViewBackgroundColor: UIColor? = .clear
+    
+    public var containerViewAlphaValue: CGFloat? = 0.6
     
     @IBOutlet var contentView: UIView!
     
@@ -37,7 +39,7 @@ public class NotificationView: UIView, AlertViewProtocol {
         Bundle.main.loadNibNamed("NotificationView", owner: self, options: nil)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        contentView.backgroundColor = containerViewBackgroundColor
+        contentView.backgroundColor = .black
         addSubview(contentView)
         
         setControls()
@@ -52,9 +54,17 @@ public class NotificationView: UIView, AlertViewProtocol {
     }
     
     private func setControls() {
+        setContentView()
         setImageView()
         setTitle()
         setDescription()
+    }
+    
+    private func setContentView() {
+        if let radius = dataSource.radius {
+            contentView.layer.cornerRadius = radius
+            contentView.clipsToBounds = true
+        }
     }
     
     private func setImageView() {

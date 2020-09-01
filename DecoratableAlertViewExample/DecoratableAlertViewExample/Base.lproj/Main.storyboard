@@ -30,6 +30,10 @@
                                     <action selector="btnCounter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1nv-iu-goL"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDx-IJ-fB1">
+                                <rect key="frame" x="252" y="88" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -37,6 +41,8 @@
                             <constraint firstItem="tf3-Mf-4Io" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="LZ7-j0-gaf"/>
                             <constraint firstItem="uTj-Vb-1Nf" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hNa-VB-yHD"/>
                             <constraint firstItem="uTj-Vb-1Nf" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="hre-Ls-QVs"/>
+                            <constraint firstItem="CDx-IJ-fB1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="44" id="pWd-kd-ThT"/>
+                            <constraint firstItem="CDx-IJ-fB1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="252" id="rbG-z7-zc3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
