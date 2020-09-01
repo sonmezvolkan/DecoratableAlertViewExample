@@ -19,17 +19,23 @@ public class MenuCell: UITableViewCell {
         super.awakeFromNib()
         backgroundColor = UIColor(red: 41, green: 80, blue: 251, alpha: 0)
         let selectedView = UIView()
-        selectedView.backgroundColor = .red
+        selectedView.backgroundColor = .black
         selectedBackgroundView = selectedView
     }
     
     public func bind(text: String) {
         self.lblMenu.text = text
         backImage.isHidden = true
+        rightImage.isHidden = false
     }
     
-    public func showBackImage() {
+    public func showBackButton() {
         backImage.isHidden = false
+        rightImage.isHidden = true
     }
     
+    public func hideBackButton() {
+        backImage.isHidden = true
+        rightImage.isHidden = false
+    }
 }

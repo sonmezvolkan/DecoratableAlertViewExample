@@ -11,8 +11,6 @@ import UIKit
 
 class TestViewController: UIViewController {
     
-    @IBOutlet weak var bottomStackView: UIStackView!
-    @IBOutlet weak var topStackView: UIStackView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomHeightConstraint: NSLayoutConstraint!
@@ -31,27 +29,6 @@ class TestViewController: UIViewController {
     private func createMenu() {
         self.menus = MockDataProvider.provideMenu()
         selectedMenus = menus?.childs
-        
-        createTopView()
-        createBottomView()
-    }
-    
-    private func createTopView() {
-        let viewTest = UIView()
-        viewTest.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 150)
-        viewTest.backgroundColor = .red
-        topStackView.addArrangedSubview(viewTest)
-        topStackView.setNeedsLayout()
-        topHeightConstraint.constant = 150
-    }
-    
-    private func createBottomView() {
-//        let viewTest = UIView()
-//        viewTest.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 250)
-//        viewTest.backgroundColor = .blue
-//        bottomStackView.addArrangedSubview(viewTest)
-//        bottomStackView.setNeedsLayout()
-//        bottomHeightConstraint.constant = 150
     }
 }
 
@@ -72,24 +49,40 @@ extension TestViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as! MenuCell
         let menu = selectedMenus![indexPath.row]
         cell.bind(text: menu.title ?? "")
+        print("\(parents.count)")
+        if indexPath.row == 0 && parents.count >= 1 {
+            cell.showBackButton()
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let cell = tableView.cellForRow(at: indexPath) as! MenuCell
+        cell.hideBackButton()
+        
         if parents.isEmpty {
             showChilds(indexPath: indexPath)
             return
         }
         
-        indexPath.row == 0 ? showParent(indexPath: indexPath) : showChilds(indexPath: indexPath)
+        if indexPath.row == 0 {
+            showParent(indexPath: indexPath)
+            return
+        }
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        if let rows = selectedMenus, rows[indexPath.row].childs == nil {
+            print("menu aç")
+            return
+        }
+        
+        showChilds(indexPath: indexPath)
     }
     
-
     
     private func showParent(indexPath: IndexPath) {
         guard !parents.isEmpty else { return }
+        
         var insertedPath = [IndexPath]()
         var deletedPath = [IndexPath]()
         
@@ -133,12 +126,11 @@ extension TestViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.insertRows(at: insertedPath, with: .left)
             tableView.endUpdates()
         }
-        
     }
     
     private func showChilds(indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! MenuCell
-        cell.showBackImage()
+        cell.showBackButton()
         
         var path = [IndexPath]()
         
