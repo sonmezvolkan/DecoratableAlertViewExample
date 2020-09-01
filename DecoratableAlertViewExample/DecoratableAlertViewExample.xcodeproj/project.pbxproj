@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		331FED5E24FE58AB007B6956 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FED5D24FE58AB007B6956 /* UIColor+Extension.swift */; };
+		331FED6124FE70B0007B6956 /* NotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 331FED6024FE70B0007B6956 /* NotificationView.xib */; };
+		331FED6324FE70BE007B6956 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FED6224FE70BE007B6956 /* NotificationView.swift */; };
+		331FED6524FE72C5007B6956 /* NotificationViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FED6424FE72C5007B6956 /* NotificationViewDataSource.swift */; };
 		3326802224DBEECE005647BE /* ConstraintModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802124DBEECE005647BE /* ConstraintModel.swift */; };
 		3326802424DBEFA8005647BE /* LeftSlideDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802324DBEFA8005647BE /* LeftSlideDecorator.swift */; };
 		3326802624DBEFB5005647BE /* RightSlideDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326802524DBEFB5005647BE /* RightSlideDecorator.swift */; };
@@ -46,6 +50,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		331FED5D24FE58AB007B6956 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		331FED6024FE70B0007B6956 /* NotificationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationView.xib; sourceTree = "<group>"; };
+		331FED6224FE70BE007B6956 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		331FED6424FE72C5007B6956 /* NotificationViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewDataSource.swift; sourceTree = "<group>"; };
 		3326802124DBEECE005647BE /* ConstraintModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintModel.swift; sourceTree = "<group>"; };
 		3326802324DBEFA8005647BE /* LeftSlideDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSlideDecorator.swift; sourceTree = "<group>"; };
 		3326802524DBEFB5005647BE /* RightSlideDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightSlideDecorator.swift; sourceTree = "<group>"; };
@@ -97,6 +105,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		331FED5F24FE70A1007B6956 /* NotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				331FED6024FE70B0007B6956 /* NotificationView.xib */,
+				331FED6224FE70BE007B6956 /* NotificationView.swift */,
+				331FED6424FE72C5007B6956 /* NotificationViewDataSource.swift */,
+			);
+			path = NotificationView;
+			sourceTree = "<group>";
+		};
 		3326802024DBEEBE005647BE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +313,7 @@
 		E704AE0524DB2125002CFC56 /* Concrete */ = {
 			isa = PBXGroup;
 			children = (
+				331FED5F24FE70A1007B6956 /* NotificationView */,
 				E7AC445124E5AB64001AFF03 /* DefaultAlertView */,
 				E75A066924E058B4008A3DDC /* MenuView */,
 				E704AE0624DB2130002CFC56 /* ErrorView */,
@@ -316,6 +335,7 @@
 			children = (
 				E704AE0F24DB24AF002CFC56 /* UIDevice+Extension.swift */,
 				E7B9622C24E70690000D4ADD /* UIApplication+Extension.swift */,
+				331FED5D24FE58AB007B6956 /* UIColor+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -406,6 +426,7 @@
 				E704ADE924DB1C88002CFC56 /* Main.storyboard in Resources */,
 				E704AE0A24DB215F002CFC56 /* ErrorView.xib in Resources */,
 				E7AC445524E5AB84001AFF03 /* DefaultAlertView.xib in Resources */,
+				331FED6124FE70B0007B6956 /* NotificationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,13 +444,16 @@
 				E704ADFC24DB1E98002CFC56 /* TopSlideDecorator.swift in Sources */,
 				E704ADE624DB1C88002CFC56 /* ViewController.swift in Sources */,
 				E704ADFE24DB1ECA002CFC56 /* BottomSlideDecorator.swift in Sources */,
+				331FED6324FE70BE007B6956 /* NotificationView.swift in Sources */,
 				33E92F4124EFB0A900413091 /* DefaultAlertViewDataSource.swift in Sources */,
 				E7AC445324E5AB76001AFF03 /* DefaultAlertView.swift in Sources */,
+				331FED5E24FE58AB007B6956 /* UIColor+Extension.swift in Sources */,
 				3326802A24DD35B7005647BE /* UIViewController+Extension.swift in Sources */,
 				3326802224DBEECE005647BE /* ConstraintModel.swift in Sources */,
 				33921DA824E12E1700FCAD38 /* ScalingDecorator.swift in Sources */,
 				333060EB24E5576400FF866A /* CustomAnimateDecorator.swift in Sources */,
 				33E92F3F24EFAC5300413091 /* DefaultAlertView+Animation.swift in Sources */,
+				331FED6524FE72C5007B6956 /* NotificationViewDataSource.swift in Sources */,
 				E704AE1024DB24AF002CFC56 /* UIDevice+Extension.swift in Sources */,
 				3326802624DBEFB5005647BE /* RightSlideDecorator.swift in Sources */,
 				33764DD724F0E313000367B8 /* MockDataProvider.swift in Sources */,

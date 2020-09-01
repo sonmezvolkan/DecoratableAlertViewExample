@@ -11,16 +11,25 @@ import UIKit
 
 public class MenuCell: UITableViewCell {
     
+    public static let shared = MenuCell()
+    
+    public var colorOfBackground = UIColor(rgb: 0x2A2A2A)
+    public var colorOfSelectedView = UIColor.black
+    public var backImg = UIImage(named: "back")
+    public var rightImg = UIImage(named: "right")
+    
     @IBOutlet weak var lblMenu: UILabel!
     @IBOutlet weak var rightImage: UIImageView!
     @IBOutlet weak var backImage: UIImageView!
     
     public override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = UIColor(red: 41, green: 80, blue: 251, alpha: 0)
+        backgroundColor = MenuCell.shared.colorOfBackground
         let selectedView = UIView()
-        selectedView.backgroundColor = .black
+        selectedView.backgroundColor = MenuCell.shared.colorOfSelectedView
         selectedBackgroundView = selectedView
+        rightImage.image = MenuCell.shared.rightImg
+        backImage.image = MenuCell.shared.backImg
     }
     
     public func bind(text: String) {

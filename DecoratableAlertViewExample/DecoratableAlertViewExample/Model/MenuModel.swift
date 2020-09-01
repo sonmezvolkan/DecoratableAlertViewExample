@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class MenuModel: Equatable {
+open class MenuModel: Equatable {
     
     public static func == (lhs: MenuModel, rhs: MenuModel) -> Bool {
-        return lhs.title == rhs.title
+        return lhs.id == rhs.id
     }
     
     public var id: Int

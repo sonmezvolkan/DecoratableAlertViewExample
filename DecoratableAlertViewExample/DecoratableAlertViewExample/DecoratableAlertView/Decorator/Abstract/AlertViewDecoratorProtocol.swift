@@ -75,9 +75,11 @@ extension AlertViewDecoratorProtocol {
 extension AlertViewDecoratorProtocol {
     
     public func setConstraints(constraintModel: ConstraintModel, selector: Selector? = nil) {
-        
         guard let mainView = self.mainView else { return }
+        
+        setOnClose()
         addShadowViewIfNeeded(selector: selector)
+        
         mainView.addSubview(containerView)
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -115,6 +117,12 @@ extension AlertViewDecoratorProtocol {
         }
         
         addAlertView(topConstant: topConstantForAlertView)
+    }
+    
+    private func setOnClose() {
+        alertView?.onClose = { [weak self] in
+            self?.closingAnimate()
+        }
     }
     
     private func addAlertView(topConstant: CGFloat) {

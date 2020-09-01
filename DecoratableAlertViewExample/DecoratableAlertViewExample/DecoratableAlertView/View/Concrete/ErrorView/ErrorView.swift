@@ -13,10 +13,16 @@ public class ErrorView: UIView, AlertViewProtocol {
 
     public var onClose: (() -> Void)?
     
-    public var containerViewBackgroundColor: UIColor? = .red
+    public var containerViewBackgroundColor: UIColor? = UIColor(red: 251, green: 51, blue: 51)
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var lbl: UILabel!
+    
+    public init(backgroundColor: UIColor) {
+        super.init(frame: .zero)
+        self.containerViewBackgroundColor = backgroundColor
+        setUp()
+    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,7 +37,7 @@ public class ErrorView: UIView, AlertViewProtocol {
         Bundle.main.loadNibNamed("ErrorView", owner: self, options: nil)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        contentView.backgroundColor = .red
+        contentView.backgroundColor = containerViewBackgroundColor
         addSubview(contentView)
     }
     
@@ -55,3 +61,4 @@ public class ErrorView: UIView, AlertViewProtocol {
         onClose?()
     }
 }
+

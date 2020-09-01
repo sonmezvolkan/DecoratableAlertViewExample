@@ -19,43 +19,51 @@ class ViewController: UIViewController {
     }
     
     @IBAction func btnShow(_ sender: Any) {
-        let errorView = ErrorView()
+        let errorView = ErrorView(backgroundColor: UIColor(red: 251, green: 51, blue: 51))
         errorView.setErrorMessage(text: "Volkan Volkan Deneme\nDeneme 2\nVa\na\nafa\nasda\nfsdf\n")
-        
-        let menuView = MenuView()
         
         let constraints = ConstraintModel.Builder()
             .build(type: .top)
     
         
-        DefaultAlertView.Builder(message: "Volkan mesaj denemesi bakalım ne olacak deneme metni ne olacak hayırdır inşallah ")
-            .setTitle(title: "Volkan Sümerya")
-            .setDirection(axis: .horizontal)
-            //.setImage(imageName: "success")
-            .addButton(dataSource: generateButton())
-            .addButton(dataSource: generateButton2())
-            .addButton(dataSource: generateButton3())
-            .setCloseButtonVisibility(visible: true)
-            .setCloseTappedAround(isEnabled: false)
-            .setUsingSpringWithDamping(ratio: 0.8)
-            .setInitialSpringVelocity(value: 0.5)
-            .setAnimationOptions(options: .curveEaseInOut)
-            .show()
-        
+//        DefaultAlertView.Builder(message: "Volkan mesaj denemesi bakalım ne olacak deneme metni ne olacak hayırdır inşallah ")
+//            .setTitle(title: "Volkan Sümerya")
+//            .setDirection(axis: .horizontal)
+//            //.setImage(imageName: "success")
+//            .addButton(dataSource: generateButton())
+//            .addButton(dataSource: generateButton2())
+//            .addButton(dataSource: generateButton3())
+//            .setCloseButtonVisibility(visible: true)
+//            .setCloseTappedAround(isEnabled: false)
+//            .setUsingSpringWithDamping(ratio: 0.8)
+//            .setInitialSpringVelocity(value: 0.5)
+//            .setAnimationOptions(options: .curveEaseInOut)
+//            .show()
+//
 
        
+        let menuView = MenuView.Builder(menus: MockDataProvider.provideMenu())
+            .setOnMenuSelect(onMenuSelect: { menu in
+                print(menu.title)
+            })
+            .build()
+        
+        let notificationView = NotificationView.Builder()
+            .setTitle(title: "Volkan Sönmez")
+            .setDescription(description: "Sent a post")
+            .build()
+        
+        let decorator = TopSlideDecorator()
 
-//        let decorator = TopSlideDecorator()
-//
-//        DecoratableAlertViewDataSource.Builder(alertView: errorView, alertDecorator: decorator)
-//            .setDuration(duration: 30)
-//            .setCanMove(canMove: true)
-//            .setAnimationTime(animationTime: 0.4)
-//            .setBlockUserInteractions(isEnabled: true)
-//            .setCloseTappedAround(isEnabled: true)
-//            .setShadowViewAlphaValue(value: 0)
-//            .setClosableZoneRatio(ratio: 0.7)
-//            .show()
+        DecoratableAlertViewDataSource.Builder(alertView: notificationView, alertDecorator: decorator)
+            .setDuration(duration: 30)
+            .setCanMove(canMove: true)
+            .setAnimationTime(animationTime: 0.4)
+            .setBlockUserInteractions(isEnabled: true)
+            .setCloseTappedAround(isEnabled: true)
+            .setShadowViewAlphaValue(value: 0.3)
+            .setClosableZoneRatio(ratio: 0.3)
+            .show()
         
     }
     
