@@ -14,15 +14,18 @@ public class DecoratableAlertViewDataSource {
     public let decorator: AlertViewDecoratorProtocol!
     public let autoClose: Bool!
     public var duration: Int!
+    public var renewDurationWhenTouchesBegan: Bool!
     public var superViewBackgroundColor: UIColor!
     
     fileprivate init(decorator: AlertViewDecoratorProtocol,
                      autoClose: Bool,
                      duration: Int,
+                     renewDurationWhenTouchesBegan: Bool,
                      superViewBackgroundColor: UIColor) {
         self.decorator = decorator
         self.autoClose = autoClose
         self.duration = duration
+        self.renewDurationWhenTouchesBegan = renewDurationWhenTouchesBegan
         self.superViewBackgroundColor = superViewBackgroundColor
     }
 
@@ -31,6 +34,7 @@ public class DecoratableAlertViewDataSource {
         private var alertDecorator: AlertViewDecoratorProtocol
         private var autoClose: Bool = false
         private var duration: Int = 15
+        private var renewDurationWhenTouchesBegan: Bool = false
         private var superViewBackgroundColor: UIColor = .clear
         
         public init(alertView: AlertViewProtocol,
@@ -62,6 +66,12 @@ public class DecoratableAlertViewDataSource {
         public func setDuration(duration: Int) -> Builder {
             self.autoClose = true
             self.duration = duration
+            return self
+        }
+        
+        @discardableResult
+        public func setRenewDurationWhenTouchesBegan(enabled: Bool) -> Builder {
+            self.renewDurationWhenTouchesBegan = enabled
             return self
         }
         
@@ -126,10 +136,15 @@ public class DecoratableAlertViewDataSource {
             return self
         }
         
-        
         @discardableResult
         public func setCanMove(canMove: Bool) -> Builder {
             self.alertDecorator.canMove = canMove
+            return self
+        }
+        
+        @discardableResult
+        public func setRadius(radius: CGFloat) -> Builder {
+            self.alertDecorator.radius = radius
             return self
         }
 
@@ -137,6 +152,7 @@ public class DecoratableAlertViewDataSource {
             return DecoratableAlertViewDataSource(decorator: alertDecorator,
                                                   autoClose: autoClose,
                                                   duration: duration,
+                                                  renewDurationWhenTouchesBegan: renewDurationWhenTouchesBegan,
                                                   superViewBackgroundColor: superViewBackgroundColor)
         }
         

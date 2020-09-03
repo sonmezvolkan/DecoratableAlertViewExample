@@ -37,6 +37,8 @@ public protocol AlertViewDecoratorProtocol: class {
     
     var shadowViewAlphaValue: CGFloat { get set }
     
+    var radius: CGFloat? { get set }
+    
     func setConstraints()
     
     func openingAnimate()
@@ -69,6 +71,8 @@ extension AlertViewDecoratorProtocol {
     public func removeViews() {
         self.containerView.removeFromSuperview()
         self.shadowView?.removeFromSuperview()
+        
+        DecoratableContext.main.reset()
     }
 }
 
@@ -77,7 +81,7 @@ extension AlertViewDecoratorProtocol {
     public func setConstraints(constraintModel: ConstraintModel, selector: Selector? = nil) {
         guard let mainView = self.mainView else { return }
         
-        setOnClose()
+        setControls()
         addShadowViewIfNeeded(selector: selector)
         
         mainView.addSubview(containerView)
@@ -119,9 +123,21 @@ extension AlertViewDecoratorProtocol {
         addAlertView(topConstant: topConstantForAlertView)
     }
     
+    private func setControls() {
+        setOnClose()
+        setContainerViewRadius()
+    }
+    
     private func setOnClose() {
         alertView?.onClose = { [weak self] in
             self?.closingAnimate()
+        }
+    }
+    
+    private func setContainerViewRadius() {
+        if let radius = self.radius {
+            containerView.layer.cornerRadius = radius
+            containerView.clipsToBounds = true
         }
     }
     

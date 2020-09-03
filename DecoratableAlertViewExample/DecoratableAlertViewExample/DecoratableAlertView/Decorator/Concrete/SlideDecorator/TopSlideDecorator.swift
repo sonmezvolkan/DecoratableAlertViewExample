@@ -39,6 +39,8 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     
     public var shadowViewAlphaValue: CGFloat = 0.4
     
+    public var radius: CGFloat?
+    
     private var isInAnimating: Bool = true
     
     private var topConstraint: NSLayoutConstraint?
@@ -51,9 +53,9 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
             .build()
     }
         
-    public init(useDefaultConstraints: Bool, constraintModel: ConstraintModel? = nil) {
+    public init(useDefaultPadding: Bool, constraintModel: ConstraintModel? = nil) {
         self.constraintModel = constraintModel
-        if useDefaultConstraints {
+        if useDefaultPadding {
             self.constraintModel = ConstraintModel.Builder()
                 .setTopConstraint(constant: UIDevice.current.getTopConstant())
                 .setLeadingConstraint(constant: 36)
@@ -73,7 +75,7 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     }
     
     public func openingAnimate() {
-        self.containerView.transform = CGAffineTransform(translationX: 0, y: -self.containerView.frame.height)
+        self.containerView.transform = CGAffineTransform(translationX: 0, y: -1.5 * self.containerView.frame.height)
         UIView.animate(withDuration: getAnimationModel().animationTime, animations: {
             self.containerView.transform = CGAffineTransform(translationX: 0, y: 0)
         }, completion: { isFinished in
@@ -84,11 +86,10 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     public func closingAnimate() {
         isInAnimating = true
         UIView.animate(withDuration: getAnimationModel().animationTime, animations: {
-            self.containerView.transform = CGAffineTransform(translationX: 0, y: -self.containerView.frame.height)
+            self.containerView.transform = CGAffineTransform(translationX: 0, y: -1.5 * self.containerView.frame.height)
             self.shadowView?.alpha = 0
         }, completion: { isFinished in
-            self.containerView.removeFromSuperview()
-            self.shadowView?.removeFromSuperview()
+            self.removeViews()
         })
     }
     
@@ -99,8 +100,13 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
     }
     
     @objc private func handlePan(panGesture: UIPanGestureRecognizer) {
+        DecoratableContext.main.onTouchesBegan()
         guard let mainView = self.mainView, !isInAnimating else { return }
         if panGesture.state == .began || panGesture.state == .changed {
+            if checkVelocity(velocity: panGesture.velocity(in: mainView)) {
+                return
+            }
+            
             let translation = panGesture.translation(in: self.mainView)
             if translation.y > 0 { return }
             
@@ -109,19 +115,13 @@ public class TopSlideDecorator: AlertViewDecoratorProtocol {
             if -translation.y >= containerView.frame.height * closeableZoneRatio {
                 closingAnimate()
             }
-            
         } else if panGesture.state == .ended {
-            if checkVelocity(velocity: panGesture.velocity(in: mainView)) {
-                return
-            }
-            
             handlePanEnd()
         }
     }
     
     private func handlePanEnd() {
         if containerView.frame.origin.y == 0 { return }
-        print(containerView.frame.origin.y)
         isInAnimating = true
         UIView.animate(withDuration: getAnimationModel().animationTime / 2, animations: {
             self.containerView.transform = .identity

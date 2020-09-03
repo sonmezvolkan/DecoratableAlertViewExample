@@ -51,18 +51,19 @@ class ViewController: UIViewController {
         let notificationView = NotificationView.Builder()
             .setTitle(title: "Volkan Sönmez")
             .setDescription(description: "Sent a post")
-        .setRadius(radius: 16)
             .build()
         
-        let decorator = TopSlideDecorator(useDefaultConstraints: true)
+        let decorator = TopSlideDecorator(useDefaultPadding: true)
 
         DecoratableAlertViewDataSource.Builder(alertView: notificationView, alertDecorator: decorator)
-            .setDuration(duration: 30)
+            .setDuration(duration: 10)
             .setCanMove(canMove: true)
             .setAnimationTime(animationTime: 0.4)
             .setBlockUserInteractions(isEnabled: false)
             .setCloseTappedAround(isEnabled: false)
-            .setClosableZoneRatio(ratio: 0.3)
+            .setClosableZoneRatio(ratio: 0.7)
+            .setRadius(radius: 16.0)
+            .setRenewDurationWhenTouchesBegan(enabled: true)
             .show()
         
     }

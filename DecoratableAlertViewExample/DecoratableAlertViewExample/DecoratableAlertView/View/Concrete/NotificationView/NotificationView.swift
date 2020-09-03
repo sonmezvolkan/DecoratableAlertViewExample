@@ -39,7 +39,6 @@ public class NotificationView: UIView, AlertViewProtocol {
         Bundle.main.loadNibNamed("NotificationView", owner: self, options: nil)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        contentView.backgroundColor = .black
         addSubview(contentView)
         
         setControls()
@@ -61,10 +60,8 @@ public class NotificationView: UIView, AlertViewProtocol {
     }
     
     private func setContentView() {
-        if let radius = dataSource.radius {
-            contentView.layer.cornerRadius = radius
-            contentView.clipsToBounds = true
-        }
+        contentView.backgroundColor = dataSource.backgroundColor
+        containerViewBackgroundColor = dataSource.containerViewBackgroundColor
     }
     
     private func setImageView() {
@@ -157,8 +154,14 @@ extension NotificationView {
         }
         
         @discardableResult
-        public func setRadius(radius: CGFloat) -> Builder {
-            dataSource.radius = radius
+        public func setBackgroundColor(color: UIColor) -> Builder {
+            dataSource.backgroundColor = color
+            return self
+        }
+        
+        @discardableResult
+        public func setContainerViewBackgroundColor(color: UIColor) -> Builder {
+            dataSource.containerViewBackgroundColor = color
             return self
         }
         

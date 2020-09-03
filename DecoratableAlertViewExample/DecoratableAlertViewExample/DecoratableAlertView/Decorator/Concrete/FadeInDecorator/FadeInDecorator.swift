@@ -45,6 +45,8 @@ public class FadeInDecorator: AlertViewDecoratorProtocol {
     
     public var shadowViewAlphaValue: CGFloat = 0.4
     
+    public var radius: CGFloat?
+    
     private var isAnimating: Bool = true
     
     public init() {

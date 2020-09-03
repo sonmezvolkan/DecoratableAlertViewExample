@@ -39,6 +39,8 @@ public class RightSlideDecorator: AlertViewDecoratorProtocol {
     
     public var shadowViewAlphaValue: CGFloat = 0.4
     
+    public var radius: CGFloat?
+    
     private var isInAnimating: Bool = true
     
     public init() {
@@ -76,8 +78,7 @@ public class RightSlideDecorator: AlertViewDecoratorProtocol {
             self.containerView.transform = CGAffineTransform(translationX: self.containerView.frame.width, y: 0)
             self.shadowView?.alpha = 0
         }, completion: { isFinished in
-            self.containerView.removeFromSuperview()
-            self.shadowView?.removeFromSuperview()
+            self.removeViews()
         })
     }
     
@@ -88,8 +89,13 @@ public class RightSlideDecorator: AlertViewDecoratorProtocol {
     }
     
     @objc private func handlePan(panGesture: UIPanGestureRecognizer) {
+        DecoratableContext.main.onTouchesBegan()
         guard let mainView = self.mainView, !isInAnimating else { return }
         if panGesture.state == .began || panGesture.state == .changed {
+            if checkVelocity(velocity: panGesture.velocity(in: mainView)) {
+                return
+            }
+            
             let translation = panGesture.translation(in: self.mainView)
             print(translation.x)
             if translation.x < 0 { return }
@@ -99,12 +105,7 @@ public class RightSlideDecorator: AlertViewDecoratorProtocol {
             if translation.x >= containerView.frame.width * closeableZoneRatio {
                 closingAnimate()
             }
-            
         } else if panGesture.state == .ended {
-            if checkVelocity(velocity: panGesture.velocity(in: mainView)) {
-                return
-            }
-            
             handlePanEnd()
         }
     }
@@ -120,7 +121,6 @@ public class RightSlideDecorator: AlertViewDecoratorProtocol {
     }
     
     private func checkVelocity(velocity: CGPoint) -> Bool {
-        print(velocity.x)
         if velocity.x < 600 { return false }
         getAnimationModel().animationTime /= 2
         closingAnimate()

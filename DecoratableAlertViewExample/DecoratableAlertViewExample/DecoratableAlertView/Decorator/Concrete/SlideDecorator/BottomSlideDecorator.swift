@@ -39,6 +39,8 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
     
     public var shadowViewAlphaValue: CGFloat = 0.4
     
+    public var radius: CGFloat?
+    
     private var isInAnimating: Bool = true
     
     public init() {
@@ -76,8 +78,7 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
             self.containerView.transform = CGAffineTransform(translationX: 0, y: self.containerView.frame.height)
             self.shadowView?.alpha = 0
         }, completion: { isFinished in
-            self.containerView.removeFromSuperview()
-            self.shadowView?.removeFromSuperview()
+            self.removeViews()
         })
     }
     
@@ -88,8 +89,13 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
     }
     
     @objc private func handlePan(panGesture: UIPanGestureRecognizer) {
+        DecoratableContext.main.onTouchesBegan()
         guard let mainView = self.mainView, !isInAnimating else { return }
         if panGesture.state == .began || panGesture.state == .changed {
+            if checkVelocity(velocity: panGesture.velocity(in: mainView)) {
+                return
+            }
+            
             let translation = panGesture.translation(in: self.mainView)
             if translation.y < 0 { return }
             
@@ -100,17 +106,12 @@ public class BottomSlideDecorator: AlertViewDecoratorProtocol {
             }
             
         } else if panGesture.state == .ended {
-            if checkVelocity(velocity: panGesture.velocity(in: mainView)) {
-                return
-            }
-            
             handlePanEnd()
         }
     }
     
     private func handlePanEnd() {
         if containerView.frame.origin.y == 0 { return }
-        print(containerView.frame.origin.y)
         isInAnimating = true
         UIView.animate(withDuration: getAnimationModel().animationTime / 2, animations: {
             self.containerView.transform = .identity

@@ -19,6 +19,7 @@ internal class DecoratableContext {
     private var timer: Timer?
     private var timerIndex = 0
     
+    
     private var mainView: UIView {
         if let tabbar = controller?.tabBarController {
             return tabbar.view
@@ -36,17 +37,31 @@ internal class DecoratableContext {
     }
     
     public func reset() {
+        dataSource = nil
+        controller = nil
+        resetTimer()
+    }
+    
+    public func resetTimer() {
         timerIndex = 0
         timer?.invalidate()
     }
     
     public func start(controller: UIViewController, dataSource: DecoratableAlertViewDataSource) {
-        reset()
+        if self.dataSource != nil { return }
+        
+        resetTimer()
         self.dataSource = dataSource
         self.controller = controller
 
         setDecorator(dataSource: dataSource)
         setAutoCloseIfNeeded()
+    }
+    
+    public func onTouchesBegan() {
+        if dataSource?.renewDurationWhenTouchesBegan ?? false {
+            timerIndex = 0
+        }
     }
     
     private func setAutoCloseIfNeeded() {
@@ -64,7 +79,7 @@ internal class DecoratableContext {
     
     @objc private func timerClick() {
         if dataSource?.duration == timerIndex {
-            reset()
+            resetTimer()
             dataSource?.decorator.closingAnimate()
         }
         timerIndex += 1
